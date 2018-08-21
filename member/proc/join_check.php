@@ -1,7 +1,7 @@
-
-
 <?php
-header("Content-Type: application/json");
+header("Content-Type: text/html charset=utf-8");
+
+//header("Content-Type: application/json");
 
 session_start();
 
@@ -11,11 +11,11 @@ $pnum3 = $_POST['pnum3'];
 
 
 echo $pnum1;
-
-
-
+//
+//$_SESSION['phoneNumber'] = (string)$pnum1.(string)$pnum2.(string)$pnum3;
+$_SESSION['phoneNumber'] = "010-7503-1624";
 print_r($_POST); // 휴대폰번호 받으면 DB에 주키로 insert하기
-
+echo $_SESSION['phoneNeumber'];
 
 //
 //Header("Location:../join_check.html");

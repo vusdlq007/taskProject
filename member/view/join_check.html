@@ -8,6 +8,9 @@
 ?>
 
 	<script>
+    var value = "<?php echo $_SESSION['confirmNumber'];?>";
+    var value2 = "<?php echo $_SESSION['phoneNumber'];?>";
+
     function createData() {
         // 1. 자바스크립트 객체 형태로 전달
         var sendData = {pnum1:$('#pnum1').val(), pnum2:$('#pnum2').val(), pnum3:$('#pnum3').val()};
@@ -15,7 +18,7 @@
         // 2. jQuery serialize함수를 사용해서 전달
         //var sendData = $('#AjaxForm').serialize();
 
-       // console.log(sendData);
+        // console.log(sendData);
 
         return sendData;
 
@@ -30,11 +33,15 @@
             type: method,
             url : "/member/proc/join_check.php",
             data: createData(),
-            dataType:"json",
+            dataType:"text",
             success : function(data, status, xhr) {
+                alert("성공 인증번호: "+value+"당신의 휴대폰:"+value2);
                 console.log(data);
             },
             error: function(jqXHR, textStatus, errorThrown) {
+                alert("실패");
+                alert(textStatus);
+                alert(jqXHR);
                 console.log(jqXHR.responseText);
             }
         });
