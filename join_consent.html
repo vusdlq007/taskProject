@@ -32,52 +32,55 @@
 
 </head>
 <script type="text/javascript">
-	function agree(){
-
-	    var check_result = document.getElementsByName("agree");
-		var checked = false;
 
 
-		for(var i = 0; i<check_result.length; i++){
-			if(check_result[i].checked){
-			    checked = true;
-			} else {
-			    checked = false;
-			}
-		}
+	function agreeOnchange() {
+        var size = document.getElementsByName("agree").length;
+        var checkedArray = new Array(size);
 
-		if(checked==false){
-		    alert("모든 약관에 동의해 주세요");
-		} else {
-            alert("모든 약관에 동의 하셨습니다.");
-            location.href="/identify_check.html";
+	    // alert("함수는실행됨"+document.getElementsByName("agree_all")[0].checked+"="+checkedArray.length );
+	    if(document.getElementsByName("agree_all")[0].checked == true){
+                for(var i=0; i < checkedArray.length; i++) {
+                    document.getElementsByName("agree")[i].checked = true;
+                }
+        } else{
+            for(var i=0; i < checkedArray.length; i++) {
+                document.getElementsByName("agree")[i].checked = false;
+            }
 
-		}
-		// if(check_result1 == ''){
-		//     alert('이용약관에 동의해주세요.');
-		// }else if(check_result2 == ''){
-        //     alert('개인정보 취급방침에 동의해주세요.');
-		// }else{
-		// 	return true;
-		// }
-	}
+         }
+
+     }
+
 
 	function agreeCheck() {
-		var checked_result = document.getElementById("agree");
-		var temparry[checked_result.length]
-		var checked = false;
+        var size = document.getElementsByName("agree").length;
+        var checked_result = new Array(size);
+        for(var i = 0; i < size; i++){
+            if(document.getElementsByName("agree")[i].checked == true){
+                 checked_result[i] = document.getElementsByName("agree")[i].value;
+                 console.log(document.getElementsByName("agree")[i].value+"(체크)");
+                 console.log("테스트"+checked_result[i]);
+             }
+          }
 
-		for(int i = 0 ;i<temparry.length ;i++){
-            for(var j=0 ; j<checked_result.length ;j++){
-                if(checked_result[j]){
-                    temparry[i] = true;
-				}
-            }
-		}
+        if (checked_result[0] == null && checked_result[1] == null) {
+            alert("약관에 동의해 주세요.")
+        } else if (checked_result[0] == "c1" && checked_result[1] == null) {
+            alert("개인정보 취급방침에 동의해주세요.");
+        } else if (checked_result[0] == null && checked_result[1] == "c2") {
+            alert("이용약관에 동의해주세요.");
+        } else if (checked_result[0] == "c1" && checked_result[1] == "c2"){
+            alert("모든 약관에 동의하셨습니다.");
+            location.href = "/identify_check.html";
+        }
+
+     }
 
 
 
-    }
+
+
 
 </script>
 <body>
@@ -505,7 +508,7 @@ Aqua Auth 컨텐츠의 녹화차단 - Aqua Director 컨텐츠의 다운로드 DR
 					<button type="button" class="js_agree_open"><em>펼치기 ▼</em></button>
 					<div class="mt10">	<!-- 약관 동의(1)!-->
 						<label class="input-sp">
-							<input type="checkbox" name="agree" value="check_1" />
+							<input type="checkbox" name="agree" value="c1"  />
 							<span class="input-txt">약관에 동의합니다.</span>
 						</label>
 					</div>
@@ -672,7 +675,7 @@ Aqua Auth 컨텐츠의 녹화차단 - Aqua Director 컨텐츠의 다운로드 DR
 					<button type="button" class="js_agree_open"><em>펼치기 ▼</em></button>
 					<div class="mt10">
 						<label class="input-sp">
-							<input type="checkbox" name="agree" onchange="agreeCheck();"/>
+							<input type="checkbox" name="agree" value="c2" />
 							<span class="input-txt">약관에 동의합니다.</span>
 						</label>
 					</div>
@@ -681,13 +684,13 @@ Aqua Auth 컨텐츠의 녹화차단 - Aqua Director 컨텐츠의 다운로드 DR
 
 			<div class="all-agree-box">
 				<label class="input-sp">
-					<input type="checkbox" />
+					<input type="checkbox" name ="agree_all" onchange="agreeOnchange()" />
 					<span class="input-txt">상위 이용약관 및 개인정보 취급방침에 모두 동의합니다.</span>
 				</label>
 			</div>
 
 			<div class="box-btn">
-				<a href="#" class="btn-l" name ="agree_all" onclick="agree();">다음단계 (휴대폰인증)</a>
+				<a href="#" class="btn-l" name ="agree_all" onclick="agreeCheck();">다음단계 (휴대폰인증)</a>
 			</div>
 
 		</div>
