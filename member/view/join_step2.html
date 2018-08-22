@@ -1,0 +1,158 @@
+<?php
+ session_start();
+
+?>
+
+	<script>
+
+            var phoneNum = new Array($("[name='phone[]'").length);
+            //$(".input-num").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );       //입력값 기호,문자 유효성 검사
+
+            function ajaxCall() {
+                var isValid = true;			//빈칸 유효성 검사
+
+                $("[name='phone[]'").each(function (index, phone) {
+                      phoneNum.push($(phone).val());
+                });
+
+                $("[name='phone[]'").each(function (index, phone) {
+                    if($(phone).val() == "") {
+                        alert("입력칸 모두를 입력해 주세요.");
+                        isValid =  false;
+                        return false;
+                    }
+                });
+
+                if (isValid) {
+                    var param = {
+                        'mode' : 'auth_num_send',
+                        'phone' : [
+                            phoneNum[0],
+                            phoneNum[1],
+                            phoneNum[2]
+                        ]
+                    };
+                    $.post( "/member/proc/join_step2.php", param , function( data ) {				// 인증번호 받기 눌렀을때
+                        alert(data.msg);
+                        $('#confirmNum').focus();
+                        if(data.result != 'success'){
+                            alert("인증받을 번호를 확인해주세요.(번호 서버에 전달 실패)");
+                            location.reload();
+                        }
+                    }, "json").error(function () {
+                        alert("error");
+                    });
+
+                } else {
+                    location.reload();
+				}
+            }
+
+			function confirmnumCheck() {
+
+				var data = $( "#AjaxForm" ).serialize();
+				$.post( "/member/proc/join_step2.php", "auth_num_check" , function( data ) {
+					alert(data.msg);
+					$('#confirmNum').focus();
+					if(data.result != 'success'){
+						alert("인증번호를 확인해주세요.(확인할번호 서버에 전달 실패)");
+						}
+				}, "json").error(function () {
+					alert("error");
+				});
+			}
+
+            // function confirmnumCheck() {
+            //     var confirmNum =  $('#confirmNum').val();
+            //     if(accept_phone== true && confirmNum =="123456"){
+            //         alert("인증에 성공하였습니다.");
+            //         location.href = "/member/index.php?mode=step_03";
+            //     }else if(accept_phone == false){
+            //         alert("인증받을 번호를 확인해주세요.");
+			//
+            //     }else{
+			//
+            //         alert("인증에 실패하였습니다. 입력받은 번호:"+$('#confirmNum').val());
+            //     }
+			//
+			//
+            // }
+
+
+
+	</script>
+<div id="container" class="container-full">
+	<div id="content" class="content">
+		<div class="inner">
+			<div class="tit-box-h3">
+				<h3 class="tit-h3">회원가입</h3>
+				<div class="sub-depth">
+					<span><i class="icon-home"><span>홈</span></i></span>
+					<strong>회원가입 완료</strong>
+				</div>
+			</div>
+
+			<div class="join-step-bar">
+				<ul>
+					<li><i class="icon-join-agree"></i> 약관동의</li>
+					<li class="on"><i class="icon-join-chk"></i> 본인확인</li>
+					<li class="last"><i class="icon-join-inp"></i> 정보입력</li>
+				</ul>
+			</div>
+
+			<div class="tit-box-h4">
+				<h3 class="tit-h4">본인인증</h3>
+			</div>
+
+			<div class="section-content after">
+				<div class="identify-box" style="width:100%;height:190px;">
+					<div class="identify-inner">
+						<strong>휴대폰 인증</strong>
+						<p>주민번호 없이 메시지 수신가능한 휴대폰으로 1개 아이디만 회원가입이 가능합니다. </p>
+
+						<br/>
+
+
+							<input type="text" name="phone[]" data-test="11" class="input-num" style="width:50px"/> -
+							<input type="text" name="phone[]"  class="input-num" style="width:50px"/> -
+							<input type="text" name="phone[]"  class="input-num" style="width:50px"/>
+							<button type="button" id="pnumCheck" class="btn-s-line"  onclick="ajaxCall();">인증번호 받기</button>
+
+						<br /><br />
+
+							<input type="text" id="confirmNum" name = "confirmNum" class="input-num" style="width:200px"/>
+							<button type="button" href="#" class="btn-s-line" onclick="confirmnumCheck();">인증번호 확인</button>
+
+					</div>
+					<i class="graphic-phon"><span>휴대폰 인증</span></i>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+	<!--<div id="footer" class="footer">-->
+		<!--<div class="inner p-r">-->
+			<!--<img src="http://img.hackershrd.com/common/logo_footer.png" class="logo-footer" alt="해커스 HRD LOGO" width="165" height="37"/>-->
+			<!--<div class="site-info">-->
+				<!--<div class="link-box">-->
+					<!--<a href="#">해커스 소개</a>-->
+					<!--<a href="#">이용약관</a>-->
+					<!--<a href="#"><strong class="tc-brand">개인정보취급방침</strong></a>-->
+					<!--<a href="#">CONTACT US</a>-->
+					<!--<a href="#">상담/고객센터</a>-->
+				<!--</div>-->
+				<!--<div class="address">-->
+					<!--㈜챔프스터디 | 사업자등록번호 [120-87-09984] | TEL : 02)537-5000<br />-->
+					<!--서울특별시 서초구 강남대로61길 23(서초동 1316-15) 현대성우빌딩 203호<br />-->
+					<!--대표이사 : 전재윤 | 개인정보관리책임자 : 김병철<br />-->
+					<!--통신판매업신고(제 2008-서울서초-0396호) 정보조회 부가통신사업신고(신고번호 : 013760)<br />-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<a href="javascript:void(window.open('https://pgweb.uplus.co.kr/pg/wmp/mertadmin/jsp/mertservice/s_escrowYn.jsp?mertid=champescrow','','scrollbars=no,width=340,height=262,top=150,left=550'))" class="lg-info"><img src="http://img.hackershrd.com/common/lg_info.gif" alt="고객님은 안전거래를 위해 교재(유료)가 포함된 상품을 무통장 입금으로 결제하시는 경우 챔프스터디가 가입한 LG U+의 구매안전 서비스를 이용하실 수 있습니다.* LG U+의 결제대금예치업 등록번호 : 02-006-00001" width="163" height="114"/></a>-->
+		<!--</div>-->
+	<!--</div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
