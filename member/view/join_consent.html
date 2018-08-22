@@ -1,63 +1,43 @@
-<!--<?php-->
-	<!--include("header.php");		// 헤더-->
-<!--?>-->
+
 <script type="text/javascript">
 
-//    $( document ).ready(function() {
+//   $( document ).ready(function() {
 //
 //		$('input[name=agree_all]').click(function() {
 //				var agree_all_checked = $(this).prop('checked');
-//                $('input[name^=agree]').each(function () {
-//                    $(this).prop("checked", agree_all_checked);
-//                });
-//        });
+//               $('input[name^=agree]').each(function () {
+//                   $(this).prop("checked", agree_all_checked);
+//               });
+//       });
 //
 //	});
 
+   $( document ).ready(function() {
 
-	function agreeOnchange() {
-        var size = document.getElementsByName("agree").length;
-        var checkedArray = new Array(size);
+       $('input[name=agree_all]').click(function() {						// 모두 동의 check박스 속성변환 기능
+           var agree_all_sign = $(this).prop('checked');
+           $('input[name^=agree]').each(function () {
+               $(this).prop("checked", agree_all_sign);
+           });
+       });
 
-	    // alert("함수는실행됨"+document.getElementsByName("agree_all")[0].checked+"="+checkedArray.length );
-	    if(document.getElementsByName("agree_all")[0].checked == true){
-                for(var i=0; i < checkedArray.length; i++) {
-                    document.getElementsByName("agree")[i].checked = true;
-                }
-        } else{
-            for(var i=0; i < checkedArray.length; i++) {
-                document.getElementsByName("agree")[i].checked = false;
-            }
+       $('a[name=next_page_go]').click(function () {						// 약관동의 유효성검사
+            var countChecked = $("input[name=agree]:checked").length;
+			if(countChecked < 2){
+			    alert("필수 동의사항에 동의해 주세요.");
+			}else{
+			    alert("모든 약관에 동의하셨습니다.");
+                location.href = "/member/index.php?mode=step_02";
+			}
 
-         }
+           // console.log(countChecked);
+           // alert(countChecked);
+       });
 
-     }
+   });
 
 
-	function agreeCheck() {
-        var size = document.getElementsByName("agree").length;
-        var checked_result = new Array(size);
-        for(var i = 0; i < size; i++){
-            if(document.getElementsByName("agree")[i].checked == true){
-                 checked_result[i] = document.getElementsByName("agree")[i].value;
-                 console.log(document.getElementsByName("agree")[i].value+"(체크)");
-                 console.log("테스트"+checked_result[i]);
-             }
-          }
 
-        if (checked_result[0] == null && checked_result[1] == null) {
-            alert("약관에 동의해 주세요.")
-        } else if (checked_result[0] == "c1" && checked_result[1] == null) {
-            alert("개인정보 취급방침에 동의해주세요.");
-        } else if (checked_result[0] == null && checked_result[1] == "c2") {
-            alert("이용약관에 동의해주세요.");
-        } else if (checked_result[0] == "c1" && checked_result[1] == "c2"){
-            alert("모든 약관에 동의하셨습니다.");
-
-            location.href = "/member/index.php?mode=step_02";
-        }
-
-     }
 
 
 
@@ -365,7 +345,7 @@ Aqua Auth 컨텐츠의 녹화차단 - Aqua Director 컨텐츠의 다운로드 DR
 					<button type="button" class="js_agree_open"><em>펼치기 ▼</em></button>
 					<div class="mt10">	<!-- 약관 동의(1)!-->
 						<label class="input-sp">
-							<input type="checkbox" name="agree" value="c1"  />
+							<input type="checkbox" id="agree01" name="agree" value="c1"  />
 							<span class="input-txt">약관에 동의합니다.</span>
 						</label>
 					</div>
@@ -532,7 +512,7 @@ Aqua Auth 컨텐츠의 녹화차단 - Aqua Director 컨텐츠의 다운로드 DR
 					<button type="button" class="js_agree_open"><em>펼치기 ▼</em></button>
 					<div class="mt10">
 						<label class="input-sp">
-							<input type="checkbox" name="agree" value="c2" />
+							<input type="checkbox" id="agree02" name="agree" value="c2" />
 							<span class="input-txt">약관에 동의합니다.</span>
 						</label>
 					</div>
@@ -541,19 +521,16 @@ Aqua Auth 컨텐츠의 녹화차단 - Aqua Director 컨텐츠의 다운로드 DR
 
 			<div class="all-agree-box">
 				<label class="input-sp">
-					<input type="checkbox" name ="agree_all"  onclick= "agreeOnchange()"/>
+					<input type="checkbox" id="agree_all" name ="agree_all"  />
 					<span class="input-txt">상위 이용약관 및 개인정보 취급방침에 모두 동의합니다.</span>
 				</label>
 			</div>
 
 			<div class="box-btn">
-				<a href="#" class="btn-l" name ="agree_all" onclick="agreeCheck();">다음단계 (휴대폰인증)</a>
+				<a href="#" class="btn-l"  name="next_page_go" >다음단계 (휴대폰인증)</a>
 			</div>
 
 		</div>
 	</div>
 </div>
 
-<!--<?php-->
-	<!--include("footer.php");-->
-<!--?>-->

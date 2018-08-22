@@ -3,49 +3,72 @@
 
  $_SESSION['confirmNumber'] = "123456";
 
- echo $_SESSION['confirmNumber'];
+ //echo $_SESSION['confirmNumber'];
 
 ?>
 
 	<script>
-    var value = "<?php echo $_SESSION['confirmNumber'];?>";
-    var value2 = "<?php echo $_SESSION['phoneNumber'];?>";
 
-    function createData() {
-        // 1. 자바스크립트 객체 형태로 전달
-        var sendData = {pnum1:$('#pnum1').val(), pnum2:$('#pnum2').val(), pnum3:$('#pnum3').val()};
 
-        // 2. jQuery serialize함수를 사용해서 전달
-        //var sendData = $('#AjaxForm').serialize();
+        var value = "<?php echo $_SESSION['confirmNumber'];?>";
+		var accept_phone = false;
 
-        // console.log(sendData);
 
-        return sendData;
+        function createData() {
+            // 1. 자바스크립트 객체 형태로 전달
+            var sendData = {pnum1:$('#pnum1').val(), pnum2:$('#pnum2').val(), pnum3:$('#pnum3').val()};
 
-        // 3. 객체를 json 문자열로 만들어서 전달
-        //var sendData = JSON.stringify({name:$('#name').val(), email:$('#email').val()});
-        //console.log(sendData);
-        //return {"data" : sendDta};
-    }
+            // 2. jQuery serialize함수를 사용해서 전달
+            //var sendData = $('#AjaxForm').serialize();
 
-    function AjaxCall(method) {
-        $.ajax({
-            type: method,
-            url : "/member/proc/join_check.php",
-            data: createData(),
-            dataType:"text",
-            success : function(data, status, xhr) {
-                alert("성공 인증번호: "+value+"당신의 휴대폰:"+value2);
-                console.log(data);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert("실패");
-                alert(textStatus);
-                alert(jqXHR);
-                console.log(jqXHR.responseText);
-            }
-        });
-    }
+            // console.log(sendData);
+
+            return sendData;
+
+            // 3. 객체를 json 문자열로 만들어서 전달
+            //var sendData = JSON.stringify({name:$('#name').val(), email:$('#email').val()});
+            //console.log(sendData);
+            //return {"data" : sendDta};
+        }
+
+        function AjaxCall(method) {
+            $.ajax({
+                type: method,
+                url : "/member/proc/join_check.php",
+                data: createData(),
+                dataType:"text",
+                success : function(data, status, xhr) {
+                    alert("인증번호 받기 성공 \n인증번호: "+value);
+                    accept_phone = true;
+                    console.log(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("실패");
+                    alert(textStatus);
+                    alert(jqXHR);
+                    console.log(jqXHR.responseText);
+                }
+            });
+        }
+
+        function confirmnum_check() {
+            var confirmNum =  $('#confirmNum').val();
+            if(accept_phone== true && confirmNum =="123456"){
+                alert("인증에 성공하였습니다.");
+                location.href = "/member/index.php?mode=step_03";
+            }else if(accept_phone == false){
+                alert("인증받을 번호를 확인해주세요.");
+
+			}else{
+
+                alert("인증에 실패하였습니다. 입력받은 번호:"+$('#confirmNum').val());
+			}
+
+
+        }
+
+
+
 
 
 
@@ -107,8 +130,8 @@
 						</form>
 						<br /><br />
 						<form>
-							<input type="text" class="input-text" style="width:200px"/>
-							<submit href="" class="btn-s-line">인증번호 확인</submit>
+							<input type="text" id="confirmNum" name = "confirmNum" class="input-text" style="width:200px"/>
+							<submit href="" class="btn-s-line" onclick="confirmnum_check();">인증번호 확인</submit>
 						</form>
 					</div>
 					<i class="graphic-phon"><span>휴대폰 인증</span></i>

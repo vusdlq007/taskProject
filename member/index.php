@@ -4,8 +4,8 @@
 
 <?php
 
-print_r($_GET);
-echo $_GET['mode'];
+//print_r($_GET);
+//echo $_GET['mode'];
 
 $modeValue = $_GET['mode'];
 
