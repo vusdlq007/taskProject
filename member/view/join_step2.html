@@ -8,6 +8,7 @@
             var phoneNum = new Array($("[name='phone[]'").length);
             //$(".input-num").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );       //입력값 기호,문자 유효성 검사
 
+
             function ajaxCall() {
                 var isValid = true;			//빈칸 유효성 검사
 
@@ -39,6 +40,8 @@
                             alert("인증받을 번호를 확인해주세요.(번호 서버에 전달 실패)");
                             location.reload();
                         }
+                        isChecked = true; // 인증번호 받을 번호를 입력하고 인증번호 받기를 제대로 실행했는지 여부
+
                     }, "json").error(function () {
                         alert("error");
                     });
@@ -48,18 +51,49 @@
 				}
             }
 
-			function confirmnumCheck() {
 
-				var data = $( "#AjaxForm" ).serialize();
-				$.post( "/member/proc/join_step2.php", "auth_num_check" , function( data ) {
-					alert(data.msg);
-					$('#confirmNum').focus();
-					if(data.result != 'success'){
-						alert("인증번호를 확인해주세요.(확인할번호 서버에 전달 실패)");
-						}
-				}, "json").error(function () {
-					alert("error");
-				});
+
+			function ajaxCall2() {
+                var isChecked = true;
+                var confirmNum = $("[name='confirmNum']").val();
+                var param = {
+                    'mode' : 'auth_num_check',
+                    'confirmNum' :  confirmNum,
+                    'phone' : [
+                        phoneNum[0],
+                        phoneNum[1],
+                        phoneNum[2]
+                    ]
+                };
+
+                for(var i = 0;i<=phoneNum.length;i++){							// 인증번호받았는지 유효성 체크
+                    if(i==3){
+                        isChecked =  true;
+					}else{
+                        if(phoneNum[i] == null) {
+                            alert("인증번호받기를 먼저 수행해주세요.");
+                            isChecked =  false;
+                        }
+					}
+
+				}
+
+				if(isChecked){													// 인증번호 확인 ajax통신
+
+                    $.post( "/member/proc/join_step2.php", param , function( data ) {
+                       if(data.result =="fail"){
+                           alert(data.msg);
+                           $('#confirmNum').val('');
+					   }else{
+                           alert(data.msg);
+                           location.href='/member/index.php?mode=step_03';
+					   }
+
+                    }, "json").error(function () {
+                        alert("error");
+                    });
+				}
+
 			}
 
             // function confirmnumCheck() {
@@ -112,16 +146,15 @@
 
 						<br/>
 
-
-							<input type="text" name="phone[]" data-test="11" class="input-num" style="width:50px"/> -
-							<input type="text" name="phone[]"  class="input-num" style="width:50px"/> -
-							<input type="text" name="phone[]"  class="input-num" style="width:50px"/>
+							<input type="text" name="phone[]" data-test="11" class="input-num" style="width:50px" maxlength="4"/> -
+							<input type="text" name="phone[]"  class="input-num" style="width:50px" maxlength="4"/> -
+							<input type="text" name="phone[]"  class="input-num" style="width:50px" maxlength="4"/>
 							<button type="button" id="pnumCheck" class="btn-s-line"  onclick="ajaxCall();">인증번호 받기</button>
 
 						<br /><br />
 
 							<input type="text" id="confirmNum" name = "confirmNum" class="input-num" style="width:200px"/>
-							<button type="button" href="#" class="btn-s-line" onclick="confirmnumCheck();">인증번호 확인</button>
+							<button type="button" href="#" class="btn-s-line" onclick="ajaxCall2();">인증번호 확인</button>
 
 					</div>
 					<i class="graphic-phon"><span>휴대폰 인증</span></i>

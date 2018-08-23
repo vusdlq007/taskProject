@@ -13,9 +13,17 @@ switch ($_POST['mode']){
 
         break;
     case 'auth_num_check' :
-
+        $phone = join('-', $_POST['phone']);
+        $confirmNum = $_POST['confirmNum'];
+        $_SESSION['auth_num'] = '123456';
+        if($_POST['confirmNum']==$_SESSION['auth_num']){
+            $return = ["msg" => '인증번호 확인이 완료되었습니다.', "result" => 'success'];
+        }else {
+            $return = ["msg" => '인증번호를 확인해주세요.', "result" => 'fail'];
+        }
 
         break;
+        
 
 }
 
