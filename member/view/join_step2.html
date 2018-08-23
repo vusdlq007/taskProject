@@ -36,10 +36,7 @@
                     $.post( "/member/proc/join_step2.php", param , function( data ) {				// 인증번호 받기 눌렀을때
                         alert(data.msg);
                         $('#confirmNum').focus();
-                        if(data.result != 'success'){
-                            alert("인증받을 번호를 확인해주세요.(번호 서버에 전달 실패)");
-                            location.reload();
-                        }
+
                         isChecked = true; // 인증번호 받을 번호를 입력하고 인증번호 받기를 제대로 실행했는지 여부
 
                     }, "json").error(function () {
@@ -86,6 +83,7 @@
                            $('#confirmNum').val('');
 					   }else{
                            alert(data.msg);
+                           alert(data.phoneTest);
                            location.href='/member/index.php?mode=step_03';
 					   }
 
