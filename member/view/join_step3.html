@@ -73,16 +73,57 @@
         });
     }
 
-	$(function(){
+    function EmailValue(){
+         var email03 = $("select[name='Email03']").val();
+         if($('select[name=Email03]').val()==""){
+             $('#em2').val("");
+              $('#em2').attr("disabled",false);
+             $('input[name=Email02]').focus();
+		 }else{
+             $('#em2').val(email03).attr("disabled",true);;
 
+		 }
+        // alert($("select[name='Email03']").val());
+
+    }
+
+
+    $(function(){
+
+        var isValide = false;
         // alert(member_id);
 	    $('form[name=memberInfo]').submit(function(){
 
 			if(!$('input[name=Name]').val()){
-			    alert('이름을 입력해 주세요~');
-                $('input[name=Name]').focus();
+					alert('이름을 입력해 주세요.');
+					$('input[name=Name]').focus();
+					return false;
+			}else if(!$('input[name=Id]').val()){
+					alert('아이디를 입력해 주세요.');
+					$('input[name=Id]').focus();
+					return false;
+            }else if(!$('input[name=Pwd]').val()){
+					alert('비밀번호를 입력해 주세요.');
+					$('input[name=Pwd]').focus();
+					return false;
+            }else if($('input[name=Pwd]').val() != $('input[name=PwdCheck]').val()){
+					alert('비밀번호가 일치하지 않습니다.');
+					$('input[name=PwdCheck]').focus();
+					return false;
+            }else if(!$('input[name=Email01]').val()){
+                alert('E-mail을 입력해 주세요.');
+                $('input[name=Email01]').focus();
                 return false;
-			}
+            }else if(!$('input[name=Email02]').val()){
+                alert('E-mail을 입력해 주세요.');
+                $('input[name=Email02]').focus();
+                return false;
+            }else if(!$('input[name=AddressPost]').val() || !$('input[name=AddressDefault]').val() || !$('input[name=AddressDetail]').val()) {
+                alert('주소를 입력해 주세요.');
+                $('input[name=AddressDetail]').focus();
+                return false;
+            }
+
 			// var isValide = true;
 			// $(this).find('input').each(function () {
 			// 	if($(this).attr('req') == 'required' && !$(this).val()){
@@ -98,6 +139,9 @@
 			//
 			// if(!isValide) return false;
 		});
+
+
+
 	});
 
 
@@ -156,22 +200,22 @@
 							</tr>
 							<tr>
 								<th scope="col"><span class="icons">*</span>비밀번호</th>
-								<td><input type="password" id = "Pwd" class="input-text" style="width:302px" placeholder="8-15자의 영문자/숫자 혼합" req="required" hname="비밀번호" msg="패스워드는 필수항목으로 반드시 입력되어야합니다."/></td>
+								<td><input type="password" name ="Pwd" class="input-text" style="width:302px" placeholder="8-15자의 영문자/숫자 혼합" req="required" hname="비밀번호" msg="패스워드는 필수항목으로 반드시 입력되어야합니다."/></td>
 							</tr>
 							<tr>
 								<th scope="col"><span class="icons">*</span>비밀번호 확인</th>
-								<td><input type="password" class="input-text" style="width:302px"/></td>
+								<td><input type="password" name="PwdCheck" class="input-text" style="width:302px"/></td>
 							</tr>
 							<tr>
 								<th scope="col"><span class="icons">*</span>이메일주소</th>
 								<td>
-									<input type="text" class="input-text" style="width:138px" req="required" hname="이메일주소[1]"/> @ <input type="text" class="input-text" style="width:138px" req="required" hname="이메일주소[2]"/>
-									<select class="input-sel" style="width:160px">
-										<option value="naver.com">선택입력</option>
-										<option value="">선택입력</option>
-										<option value="">선택입력</option>
-										<option value="">선택입력</option>
-										<option value="">선택입력</option>
+									<input type="text" name = "Email01" class="input-text" style="width:138px" req="required" hname="이메일주소[1]"/> @ <input type="text" name = "Email02" id="em2" value="" class="input-text" style="width:138px" req="required" hname="이메일주소[2]"/>
+									<select name = "Email03"class="input-sel" style="width:160px" onchange="EmailValue()">
+										<option value="">직접입력</option>
+										<option value="naver.com">naver.com</option>
+										<option value="daum.com">daum.com</option>
+										<option value="gmail.com">gmail.com</option>
+										<option value="nate.com">nate.com</option>
 									</select>
 								</td>
 							</tr>
@@ -192,13 +236,13 @@
 								<th scope="col"><span class="icons">*</span>주소</th>
 								<td>
 									<p >
-										<label>우편번호 <input type="text" id="postcode" class="input-text ml5" style="width:242px" disabled /></label><input type="button" class="btn-s-tin ml10" onclick="sample4_DaumPostcode()" value="주소찾기"></input>
+										<label>우편번호 <input type="text" name="AddressPost" id="postcode" class="input-text ml5" style="width:242px" disabled /></label><input type="button" class="btn-s-tin ml10" onclick="sample4_DaumPostcode()" value="주소찾기"></input>
 									</p>
 									<p class="mt10">
-										<label>기본주소 <input type="text" id="roadAddress" class="input-text ml5" style="width:719px"/></label>
+										<label>기본주소 <input type="text" name="AddressDefault" id="roadAddress" class="input-text ml5" style="width:719px" disabled/></label>
 									</p>
 									<p class="mt10">
-										<label>상세주소 <input type="text" id="jibunAddress" class="input-text ml5" style="width:719px"/></label>
+										<label>상세주소 <input type="text" name="AddressDetail" id="jibunAddress" class="input-text ml5" style="width:719px"/></label>
 									</p>
 								</td>
 							</tr>
