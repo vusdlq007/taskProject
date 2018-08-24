@@ -22,6 +22,6 @@ if (!$connect) {
 //
 //if(!$connect) die('DB연결 실패 : ' . mysqli_error());
 
-echo "연결성공";
+//echo "연결성공";
 
 ?>

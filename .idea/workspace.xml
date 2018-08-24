@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="a789ac9e-f478-44e2-a5ed-a50f5c266c65" name="Default Changelist" comment="" />
+=======
     <list default="true" id="a789ac9e-f478-44e2-a5ed-a50f5c266c65" name="Default Changelist" comment="">
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+>>>>>>> d8a52e55c51dc3e7664adbcff060c48c326abdf6
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
+>>>>>>> 736671e115e6488f78b268828c416727a44da84c
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,36 +22,37 @@
     <session id="-2008538076">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="2" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="123" value="1" />
-          <entry key="html" value="13" />
+          <entry key="html" value="14" />
           <entry key="php" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="13" />
+          <entry key="HTML" value="14" />
           <entry key="PHP" value="18" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="10517" />
+          <entry key="html" value="12186" />
           <entry key="php" value="3384" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="10517" />
+          <entry key="HTML" value="12186" />
           <entry key="PHP" value="3384" />
         </counts>
       </usages-collector>
@@ -65,6 +74,7 @@
           <entry key="HTML" value="1014" />
         </counts>
       </usages-collector>
+<<<<<<< HEAD
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="2" />
@@ -73,6 +83,8 @@
           <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
+=======
+>>>>>>> d8a52e55c51dc3e7664adbcff060c48c326abdf6
     </session>
   </component>
   <component name="FileEditorManager">
@@ -89,8 +101,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/member/view/join_step2.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="608">
               <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
+=======
+<<<<<<< HEAD
+            <state relative-caret-position="95">
+              <caret line="80" column="48" selection-start-line="80" selection-start-column="48" selection-end-line="80" selection-end-column="48" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+=======
+            <state relative-caret-position="608">
+              <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
+>>>>>>> 736671e115e6488f78b268828c416727a44da84c
+>>>>>>> d8a52e55c51dc3e7664adbcff060c48c326abdf6
             </state>
           </provider>
         </entry>
@@ -98,8 +123,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/member/proc/join_step2.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="342">
               <caret line="18" selection-start-line="18" selection-end-line="18" />
+=======
+<<<<<<< HEAD
+            <state relative-caret-position="323">
+              <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+=======
+            <state relative-caret-position="342">
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
+>>>>>>> 736671e115e6488f78b268828c416727a44da84c
+>>>>>>> d8a52e55c51dc3e7664adbcff060c48c326abdf6
             </state>
           </provider>
         </entry>
@@ -107,8 +142,18 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/member/view/join_step3.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="-1083">
               <caret line="59" column="34" lean-forward="true" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
+=======
+<<<<<<< HEAD
+            <state relative-caret-position="437">
+              <caret line="200" column="40" lean-forward="true" selection-end-line="350" />
+=======
+            <state relative-caret-position="584">
+              <caret line="167" column="44" lean-forward="true" selection-start-line="167" selection-start-column="44" selection-end-line="167" selection-end-column="44" />
+>>>>>>> 736671e115e6488f78b268828c416727a44da84c
+>>>>>>> d8a52e55c51dc3e7664adbcff060c48c326abdf6
               <folding>
                 <element signature="n#style#0;n#input#0;n#td#0;n#tr#2;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#select#0;n#td#0;n#tr#4;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -117,11 +162,36 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/member/proc/join_step3.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="969">
               <caret line="51" column="2" selection-start-line="51" selection-start-column="2" selection-end-line="51" selection-end-column="2" />
+=======
+<<<<<<< HEAD
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/member/proc/join_step3.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="397">
+              <caret line="32" column="23" lean-forward="true" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+=======
+>>>>>>> 736671e115e6488f78b268828c416727a44da84c
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/member/proc/join_step3.php">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="361">
+              <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+=======
+            <state relative-caret-position="38">
+              <caret line="51" column="2" selection-start-line="51" selection-start-column="2" selection-end-line="51" selection-end-column="2" />
+>>>>>>> 736671e115e6488f78b268828c416727a44da84c
+>>>>>>> d8a52e55c51dc3e7664adbcff060c48c326abdf6
             </state>
           </provider>
         </entry>
@@ -129,6 +199,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/member/db/dbconn.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+            <state relative-caret-position="190">
+              <caret line="10" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="26" />
+=======
+>>>>>>> d8a52e55c51dc3e7664adbcff060c48c326abdf6
             <state relative-caret-position="209">
               <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
             </state>
@@ -138,8 +215,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/member/db/db_selectTest.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="285">
               <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+=======
+            <state relative-caret-position="190">
+              <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+>>>>>>> 736671e115e6488f78b268828c416727a44da84c
+>>>>>>> d8a52e55c51dc3e7664adbcff060c48c326abdf6
             </state>
           </provider>
         </entry>
@@ -304,6 +387,31 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
+=======
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="hackersWeb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hackersWeb" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hackersWeb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hackersWeb" type="462c0819:PsiDirectoryNode" />
+              <item name="member" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hackersWeb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hackersWeb" type="462c0819:PsiDirectoryNode" />
+              <item name="member" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+>>>>>>> d8a52e55c51dc3e7664adbcff060c48c326abdf6
       <pane id="Scope">
         <subPane subId="Scope 'Changed Files'; set:Changed Files; ALL; class com.intellij.packageDependencies.ChangeListScope">
           <expand>
@@ -396,19 +504,42 @@
       <workItem from="1534808416324" duration="31547000" />
       <workItem from="1534894984200" duration="33508000" />
       <workItem from="1534932748463" duration="90000" />
+<<<<<<< HEAD
       <workItem from="1534982825611" duration="30206000" />
       <workItem from="1535107472061" duration="292000" />
       <workItem from="1535107782367" duration="336000" />
+=======
+      <workItem from="1534982825611" duration="30779000" />
+      <workItem from="1535068838340" duration="17063000" />
+>>>>>>> d8a52e55c51dc3e7664adbcff060c48c326abdf6
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="117622000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1116" height="1047" extended-state="0" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2092803" />
+=======
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="128531000" />
+=======
+    <option name="totallyTimeSpent" value="116395000" />
+>>>>>>> 736671e115e6488f78b268828c416727a44da84c
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="0" width="1116" height="1047" extended-state="0" />
+    <editor active="true" />
+    <layout>
+<<<<<<< HEAD
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12473348" />
+=======
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20170455" />
+>>>>>>> 736671e115e6488f78b268828c416727a44da84c
+>>>>>>> d8a52e55c51dc3e7664adbcff060c48c326abdf6
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -460,6 +591,8 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
     <entry file="file://$PROJECT_DIR$/member/view/join_step1.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
@@ -467,6 +600,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/api_test.html" />
     <entry file="file://$PROJECT_DIR$/header.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -479,11 +613,32 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="19" column="14" lean-forward="true" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+=======
+>>>>>>> 736671e115e6488f78b268828c416727a44da84c
+    <entry file="file://$PROJECT_DIR$/api_test.html" />
+    <entry file="file://$PROJECT_DIR$/member/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="57">
+          <caret line="3" column="94" selection-start-line="3" selection-start-column="94" selection-end-line="3" selection-end-column="94" />
+=======
+        <state relative-caret-position="190">
+          <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+>>>>>>> 736671e115e6488f78b268828c416727a44da84c
+>>>>>>> d8a52e55c51dc3e7664adbcff060c48c326abdf6
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/member/index.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="209">
           <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
         </state>
@@ -493,11 +648,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="18" selection-start-line="18" selection-end-line="18" />
+=======
+        <state relative-caret-position="114">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+>>>>>>> d8a52e55c51dc3e7664adbcff060c48c326abdf6
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/member/proc/join_step3.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="969">
           <caret line="51" column="2" selection-start-line="51" selection-start-column="2" selection-end-line="51" selection-end-column="2" />
         </state>
@@ -521,13 +681,76 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
           <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
+=======
+        <state relative-caret-position="209">
+          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/member/proc/join_step2.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/member/view/join_step1.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/member/view/join_step2.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="95">
+          <caret line="80" column="48" selection-start-line="80" selection-start-column="48" selection-end-line="80" selection-end-column="48" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+=======
+        <state relative-caret-position="608">
+          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
+>>>>>>> 736671e115e6488f78b268828c416727a44da84c
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/member/proc/db_selectTest2.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="361">
+          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+=======
+        <state relative-caret-position="342">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+>>>>>>> 736671e115e6488f78b268828c416727a44da84c
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/member/proc/join_step3.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="397">
+          <caret line="32" column="23" lean-forward="true" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
+=======
+        <state relative-caret-position="38">
+          <caret line="51" column="2" selection-start-line="51" selection-start-column="2" selection-end-line="51" selection-end-column="2" />
+>>>>>>> 736671e115e6488f78b268828c416727a44da84c
+>>>>>>> d8a52e55c51dc3e7664adbcff060c48c326abdf6
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/member/view/join_step3.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="-1083">
           <caret line="59" column="34" lean-forward="true" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="437">
+          <caret line="200" column="40" lean-forward="true" selection-end-line="350" />
+=======
+        <state relative-caret-position="584">
+          <caret line="167" column="44" lean-forward="true" selection-start-line="167" selection-start-column="44" selection-end-line="167" selection-end-column="44" />
+>>>>>>> 736671e115e6488f78b268828c416727a44da84c
+>>>>>>> d8a52e55c51dc3e7664adbcff060c48c326abdf6
           <folding>
             <element signature="n#style#0;n#input#0;n#td#0;n#tr#2;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#select#0;n#td#0;n#tr#4;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
