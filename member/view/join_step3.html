@@ -3,17 +3,14 @@
 	session_start();
 ?>
 <script >
-
     function sample4_DaumPostcode() {																					// 다음 주소검색 API  기능
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
                 // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
                 var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
                 // 법정동명이 있을 경우 추가한다. (법정리는 제외)
                 // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
                 if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
@@ -31,22 +28,18 @@
                 if(fullRoadAddr !== ''){
                     fullRoadAddr += extraRoadAddr;
                 }
-
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('postcode').value = data.zonecode; //5자리 새우편번호 사용
                 document.getElementById('roadAddress').value = fullRoadAddr;
                 document.getElementById('jibunAddress').value = data.jibunAddress;
-
                 // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
                 if(data.autoRoadAddress) {
                     //예상되는 도로명 주소에 조합형 주소를 추가한다.
                     var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
                     document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-
                 } else if(data.autoJibunAddress) {
                     var expJibunAddr = data.autoJibunAddress;
                     document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-
                 } else {
                     document.getElementById('guide').innerHTML = '';
                 }
@@ -55,45 +48,48 @@
     }
 
 
-    function ajaxCheck() {									// ID 중복체크 함수
-				var regId = /^[a-z0-9]{4,12}$/;
-				if(!regId.test($('input[name=Id]').val())){				// 4글자이상인지 검사부분
-					alert("최소 4글자 이상이여야 합니다.");
-					$('input[name=Id]').focus();
-					return false;
-				}else{
-					var Ids = $("input[name='Id']").val();
-					// alert("입력받은 아이디:"+Ids);
-					var param = {
-						'mode' : 'IdChecking',
-						'IdValue' : Ids
-					};
-					$.post("/member/proc/join_step3.php",param,function (data) {					//param은 넘겨주는 값 function(data) data인자는 넘겨받은값
-						alert(data.msg);
-						// $('#Pwd').focus();
-						// if(data.result == 'fail'){
-						// 	$('#Id').val('');
-						// }
-					},"json").fail(function() {
-						alert( "error" );
-					});
-				}
+    var isValide = false;							// ID 중복체크 실시 여부 확인변수
 
-			}
+    function ajaxCheck() {									// ID 중복체크 함수
+        var regId = /^[a-z0-9]{4,12}$/;
+        if(!regId.test($('input[name=Id]').val())){				// 4글자이상인지 검사부분
+            alert("최소 4글자 이상이여야 합니다.");
+            $('input[name=Id]').focus();
+            return false;
+        }else{
+            var Ids = $("input[name='Id']").val();
+            // alert("입력받은 아이디:"+Ids);
+            var param = {
+                'mode' : 'IdChecking',
+                'IdValue' : Ids
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/member/proc/join_step3.php",
+                data: param,
+                dataType: "json"
+            }).done(function(data) {
+                alert("통신성공 : "+data.msg);
+                isValide = true;
+            });
+
+
+        }
+    }
+
+
 
     function EmailValue(){																	// E-mail Selectbox로 설정에 맞게 값 넣어주는 기능
-				var email03 = $("select[name='Email03']").val();
-				if($('select[name=Email03]').val()==""){
-					$('#em2').val("");
-					$('#em2').attr("disabled",false);
-					$('input[name=Email02]').focus();
-				}else{
-					$('#em2').val(email03).attr("disabled",true);;
-
-				}
-
-			}
-
+        var email03 = $("select[name='Email03']").val();
+        if($('select[name=Email03]').val()==""){
+            $('#em2').val("");
+            $('#em2').attr("disabled",false);
+            $('input[name=Email02]').focus();
+        }else{
+            $('#em2').val(email03).attr("disabled",true);;
+        }
+    }
     function NameCheck() {																	//이름 입력란 유효성 검사 기능
         var regId = /^[ㄱ-ㅎㅏ-ㅣ가-힣]*$/;
         if(!regId.test($('input[name=Name]').val()) && !$('input[name=Name]').val()=="") {				// 공백이아닐때 정규식 조건에 안맞으면 경고
@@ -104,31 +100,24 @@
         }
         return true;
     }
-
-
-
     function idCheck() {																	//중복체크ID 입력란 유효성 검사 기능
-			 var regId = /^[a-z][a-z0-9]+$/;
-			 if(!regId.test($('input[name=Id]').val()) && !$('input[name=Id]').val()=="") {				// 공백이아닐때 정규식 조건에 안맞으면 경고
-				 alert('영문과 숫자 8~12자 이내로 입력하세요.');
-				 $('input[name=Id]').val('');
-				 $('input[name=Id]').focus();
-				 return false;
-			 }
-			 return true;
-		  }
-
-
+        var regId = /^[a-z][a-z0-9]+$/;
+        if(!regId.test($('input[name=Id]').val()) && !$('input[name=Id]').val()=="") {				// 공백이아닐때 정규식 조건에 안맞으면 경고
+            alert('영문과 숫자 8~12자 이내로 입력하세요.');
+            $('input[name=Id]').val('');
+            $('input[name=Id]').focus();
+            return false;
+        }
+        return true;
+    }
     function PwdCheck(){														// 비밀번호 영문숫자 조합여부 확인
         var str =  $('input[name=Pwd]').val();
         var reg1 = /^[a-z0-9]{8,15}$/;    // a-z 0-9 중에 8자리 부터 15자리만 허용 한다는 뜻
         var reg2 = /[a-z]/g;
         var reg3 = /[0-9]/g;
-
-		// alert("PwdCheck 값 : "+(reg1.test(str) &&  reg2.test(str) && reg3.test(str)));
+        // alert("PwdCheck 값 : "+(reg1.test(str) &&  reg2.test(str) && reg3.test(str)));
         return(reg1.test(str) &&  reg2.test(str) && reg3.test(str));
     }
-
 
     function EmailCheck() {																	//이름 입력란 유효성 검사 기능
         var regId = /^[a-zA-Z0-9]+$/;
@@ -142,78 +131,124 @@
         return true;
     }
 
+    function JoinMember(){
+        var Name = $("input[name=Name]").val();
+		var Id = $("input[name=Id]").val();
+		var Pwd =  $("input[name=Pwd]").val();
+		var Email = $("input[name=Email01]").val().concat("@",$("input[name=Email02]").val());
+		var Phone =  $("input[name=Phone1]").val().concat("-",$("input[name=Phone2]").val(),"-",$("input[name=Phone3]").val());
+		var Tel = $("input[name=Tel]").val();
+		var Address = $("input[name=AddressPost]").val().concat("",$("input[name=AddressDefault]").val()," ",$("input[name=AddressDetail]").val());
+ 		var SMStr = $("input[type=radio][name^=SMS]:checked").val();
+		var Mailtr = $("input[type=radio][name^=Mail]:checked").val();
+
+
+		alert("이름: "+Name
+        +"\nid: "+Id
+        +"\nPwd: "+Pwd
+        +"\nEmail: "+Email
+		+"\nPhone: "+Phone
+        +"\nTel: "+Tel
+        +"\nAddress: "+Address
+        +"\nSMSok: "+SMStr
+        +"\nMailok: "+Mailtr
+		);
+		// var param = {
+		//     "mode" : "MemberJoin",
+		//     "Name" : Name,
+		// 	"Id"   : Id,
+		// 	"Pwd"  : Pwd,
+		// 	"Email" : Email,
+		// 	"Phone" : Phone,
+		// 	"Tel"	: Tel,
+		// 	"Address" : Address,
+		// 	"SMSAgree"	: SMStr,
+		// 	"MailAgree" : Mailtr
+		//
+		// }
+		//
+        // $.post( "/member/proc/join_step3.php", param , function( data ) {
+        //     if(data.result =="fail"){
+        //         alert(data.msg);
+		//
+        //     }else{
+        //         alert(data.msg);
+        //         location.href='/member/index.php?mode=step_04';
+        //     }
+		//
+        // }, "json").error(function () {
+        //     alert("error");
+        // });
+    }
+
+
+
+
 
     $(function(){
 
+        // alert(member_id);
 
-        var bool = false;
-
-            var isValide = false;
-            // alert(member_id);
             $('form[name=memberInfo]').submit(function(){
-
-                      if (!$('input[name=Name]').val()) {
-                        alert('이름을 입력해 주세요.');
-                        $('input[name=Name]').focus();
-                        return false;
-                    } else if (!$('input[name=Id]').val()) {
-                        alert('아이디를 입력해 주세요.');
-                        $('input[name=Id]').focus();
-                        return false;
-                    } else if (!$('input[name=Pwd]').val()) {
-                        alert('비밀번호를 입력해 주세요.');
-                        $('input[name=Pwd]').focus();
-                        return false;
-                    } else if ($('input[name=Pwd]').val() != $('input[name=PwdCheck]').val()) {
-                        alert('비밀번호가 일치하지 않습니다.');
-                        $('input[name=PwdCheck]').focus();
-                        return false;
-                    } else if (!$('input[name=Email01]').val()) {
-                        alert('E-mail을 입력해 주세요.');
-                        $('input[name=Email01]').focus();
-                        return false;
-                    } else if (!$('input[name=Email02]').val()) {
-                        alert('E-mail을 입력해 주세요.');
-                        $('input[name=Email02]').focus();
-                        return false;
-                    } else if (!$('input[name=AddressPost]').val() || !$('input[name=AddressDefault]').val() || !$('input[name=AddressDetail]').val()) {
-                        alert('주소를 입력해 주세요.');
-                        $('input[name=AddressDetail]').focus();
-                        return false;
+                if(isValide == false){
+                    alert("ID 중복확인 후 가입해주세요.");
+                    $('input[name=Id]').focus();
+                    return false;
+                }else{
+                    // if (!$('input[name=Name]').val()) {
+                    //     alert('이름을 입력해 주세요.');
+                    //     $('input[name=Name]').focus();
+                    //     return false;
+                    // } else if (!$('input[name=Id]').val()) {
+                    //     alert('아이디를 입력해 주세요.');
+                    //     $('input[name=Id]').focus();
+                    //     return false;
+                    // } else if (!$('input[name=Pwd]').val()) {
+                    //     alert('비밀번호를 입력해 주세요.');
+                    //     $('input[name=Pwd]').focus();
+                    //     return false;
+                    // } else if ($('input[name=Pwd]').val() != $('input[name=PwdCheck]').val()) {
+                    //     alert('비밀번호가 일치하지 않습니다.');
+                    //     $('input[name=PwdCheck]').focus();
+                    //     return false;
+                    // } else if (!$('input[name=Email01]').val()) {
+                    //     alert('E-mail을 입력해 주세요.');
+                    //     $('input[name=Email01]').focus();
+                    //     return false;
+                    // } else if (!$('input[name=Email02]').val()) {
+                    //     alert('E-mail을 입력해 주세요.');
+                    //     $('input[name=Email02]').focus();
+                    //     return false;
+                    // } else if (!$('input[name=AddressPost]').val() || !$('input[name=AddressDefault]').val() || !$('input[name=AddressDetail]').val()) {
+                    //     alert('주소를 입력해 주세요.');
+                    //     $('input[name=AddressDetail]').focus();
+                    //     return false;
+                    // }
+                    if(PwdCheck()==false){
+                        alert("비밀번호는 영문 숫자 조합 8자리 이상입니다.");
+                        // $('input[name=Pwd]').val('');
+                        // $('input[name=Pwd]').focus();
                     }
+                    // var isValide = true;																			// 이런 방법도 있다 jquery로 짧게 공통된 검사 구문을 선택자로 선택해서 관리할수있음
+                    // $(this).find('input').each(function () {
+                    // 	if($(this).attr('req') == 'required' && !$(this).val()){
+                    //
+                    // 	    if($(this).attr('msg')) alert($(this).attr('msg'));
+                    // 	    else  alert($(this).attr('hname')+'을 입력해 주세요.~~~~');
+                    //
+                    // 	    $(this).focus();
+                    //         isValide = false;
+                    // 	    return false;
+                    // 	}
+                    // });
+                    //
+                    // if(!isValide) return false;
+                }
 
-
-                      if(PwdCheck()==false){
-                          alert("비밀번호는 영문 숫자 조합 8자리 이상입니다.");
-                          // $('input[name=Pwd]').val('');
-                          // $('input[name=Pwd]').focus();
-
-					  }
-
-
-                // var isValide = true;																			// 이런 방법도 있다 jquery로 짧게 공통된 검사 구문을 선택자로 선택해서 관리할수있음
-                // $(this).find('input').each(function () {
-                // 	if($(this).attr('req') == 'required' && !$(this).val()){
-                //
-                // 	    if($(this).attr('msg')) alert($(this).attr('msg'));
-                // 	    else  alert($(this).attr('hname')+'을 입력해 주세요.~~~~');
-                //
-                // 	    $(this).focus();
-                //         isValide = false;
-                // 	    return false;
-                // 	}
-                // });
-                //
-                // if(!isValide) return false;
             });
 
 
-
-
     });
-
-
-
 </script>
 
 
@@ -279,9 +314,9 @@
 							<th scope="col"><span class="icons">*</span>휴대폰 번호</th>
 							<?php $phoneArry = explode("-",$_SESSION['phoneNum']); ?>
 							<td>
-								<input type="text" class="input-text" style="width:50px" value="<?php echo $phoneArry[0] ?>" disabled /> -
-								<input type="text" class="input-text" style="width:50px" value="<?php echo $phoneArry[1] ?>" disabled/> -
-								<input type="text" class="input-text" style="width:50px" value="<?php echo $phoneArry[2] ?>" disabled/>
+								<input type="text" name="Phone1" class="input-text" style="width:50px" value="<?php echo $phoneArry[0] ?>" disabled /> -
+								<input type="text" name="Phone2" class="input-text" style="width:50px" value="<?php echo $phoneArry[1] ?>" disabled/> -
+								<input type="text" name="Phone3" class="input-text" style="width:50px" value="<?php echo $phoneArry[2] ?>" disabled/>
 							</td>
 						</tr>
 						<tr>
@@ -307,11 +342,11 @@
 							<td>
 								<div class="box-input">
 									<label class="input-sp">
-										<input type="radio" name="radio" id="SMSAccept" checked="checked"/>
+										<input type="radio" name="SMSOK" id="SMSAccept" value="SMSOK" checked="checked"/>
 										<span class="input-txt">수신함</span>
 									</label>
 									<label class="input-sp">
-										<input type="radio" name="radio" id="SMSDine" />
+										<input type="radio" name="SMSOK" id="SMSDine" value="SMSNO" />
 										<span class="input-txt">미수신</span>
 									</label>
 								</div>
@@ -323,11 +358,11 @@
 							<td>
 								<div class="box-input">
 									<label class="input-sp">
-										<input type="radio" name="radio2" id="MailAccept" checked="checked"/>
+										<input type="radio" name="MailOK" id="MailAccept" checked="checked" value="MailAccept"/>
 										<span class="input-txt">수신함</span>
 									</label>
 									<label class="input-sp">
-										<input type="radio" name="radio2" id="MailDine" />
+										<input type="radio" name="MailOK" id="MailDine" value="MailDine"/>
 										<span class="input-txt">미수신</span>
 									</label>
 								</div>
@@ -340,7 +375,7 @@
 
 					<div class="box-btn">
 						<!--<a href="#" class="btn-l">회원가입</a>-->
-						<input type="submit" class="btn-l" value="회원가입">
+						<a href="#" type="button" class="btn-l" onclick="JoinMember()" value="회원가입">회원가입</a>
 					</div>
 
 			</form>
