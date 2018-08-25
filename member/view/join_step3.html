@@ -101,13 +101,17 @@
         return true;
     }
     function idCheck() {																	//중복체크ID 입력란 유효성 검사 기능
-        var regId = /^[a-z][a-z0-9]+$/;
-        if(!regId.test($('input[name=Id]').val()) && !$('input[name=Id]').val()=="") {				// 공백이아닐때 정규식 조건에 안맞으면 경고
-            alert('영문과 숫자 8~12자 이내로 입력하세요.');
-            $('input[name=Id]').val('');
-            $('input[name=Id]').focus();
-            return false;
-        }
+        var str =  $('input[name=Id]').val();
+       // var regId = /^(a-z)[a-z0-9]+$/g;
+        var regId = /^[a-z][a-z0-9]*$/;
+        // var result = regId.test(str);
+
+            if(!regId.test(str) && !regId.test(str) == "") {				// 공백이아닐때 정규식 조건에 안맞으면 경고
+                alert('영문과 숫자 4~15자 이내로 입력하세요.');
+                $('input[name=Id]').val('');
+                $('input[name=Id]').focus();
+                return false;
+            }
         return true;
     }
     function PwdCheck(){														// 비밀번호 영문숫자 조합여부 확인
