@@ -1,10 +1,10 @@
 <?php
 
-$mysql_hostname = "192.168.56.105";
+$mysql_hostname = "localhost";
 $mysql_username = "root";
 $mysql_password = "162400";
 $mysql_database = "hackers";
-$mysql_port = "3306";
+$mysql_port = "3307";
 
 
 $connect = mysqli_connect($mysql_hostname,$mysql_username,$mysql_password,$mysql_database,$mysql_port);

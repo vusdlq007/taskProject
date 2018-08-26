@@ -1,31 +1,56 @@
 <?php
 header('Content-Type: application/json');
 include($_SERVER['DOCUMENT_ROOT']."/member/db/dbconn.php");
+session_start();
+
+
+
 
 $request = $_POST ? $_POST : $_GET;
 
 
 
     function MemberJoining($connect){                     // 회원가입 정보 insert 하는함수             서버에서 다시 받은값 유효성 검사
-        $sql = "insert into Member(Name, ID, PassWord, Email, Phone, Tel, Addr, SMSAgree, MailAgree, MemberIDX) values('".$_POST['Name']."','".$_POST['Id']."','".$_POST['Pwd']."','".$_POST['Email']."','".$_POST['Phone']."','".$_POST['Tel']."','".$_POST['Address']."',"
-                .$_POST['SMSAgree'].",".$_POST['MailAgree'].",NULL);";
+
+
+        echo "Email02체크:".$_POST['Email02'];
+        if($_POST['Email02']){
+            $Emailarray = array($_POST['Email01'],"@",$_POST["Email02"]);
+            $Email=implode($Emailarray);
+        }else{
+            $Emailarray = array($_POST['Email01'],"@",$_POST["Email03"]);
+            $Email=implode($Emailarray);
+        }
+//
+//        $Addressarray = array($_POST['AddressPost'],$_POST['AddressDefault'],$_POST['AddressDetail']);
+//        $Address=implode($Addressarray);
+
+        $sql = "insert into Member(Name, ID, PassWord, Email, Phone, Tel, Addr, SMSAgree, MailAgree, MemberIDX) values('".$_POST['Name']."','".$_POST['Id']."','".$_POST['Pwd']."','".$Email."','".$_SESSION['phoneNum']."','".$_POST['Tel']."','".$_POST['FullAddress']."',"
+                .$_POST['SMSOK'].",".$_POST['MailOK'].",NULL);";
 
         $result = mysqli_query($connect,$sql);
 //        var_dump('$connect', $connect);
 //        var_dump($sql)
-        var_dump('$sql', $sql);
+        var_dump('$sql:', $sql);
         //var_dump('$result', $result);
 
-        $IdValue = mysqli_fetch_array($result);
-        var_dump($sql) ;
+//        var_dump($sql) ;
+
+        if(!$_POST['Name'] || !$_POST['Id'] || !$_POST['Pwd'] || empty($Email) || empty($_SESSION['phoneNum']) || empty($_POST['FullAddress']) || !$_POST['SMSOK'] || !$_POST['MailOK']){
+            return false;
+        }else{
+            if($result){                      // Id 비교 성공시
+                return true;
+            }else{                                      // Id 비교 실패시
+                return false;
+            }
+        }
+
+
   
 
 
-        if($IdValue){                      // Id 비교 성공시
-            return true;
-        }else{                                      // Id 비교 실패시
-            return false;
-        }
+
 
     };
 //echo $sql;
@@ -63,21 +88,34 @@ switch ($request['mode']) {
         break;
 
     case "MemberJoin" :
+        //echo "MemberJoin케이스 진입";
         $CheckJoin = MemberJoining($connect);
        // var_dump('$CheckJoin',$CheckJoin);
-        if ($CheckToId == false) {
+
+        if ($CheckJoin) {
+            echo "회원가입 성공!";
             $return = ["msg" => '회원가입에 성공 했습니다.', "result" => 'success'];
         } else {
+            echo "회원가입 실패!" ;
             $return = ["msg" => '회원가입에 실패 했습니다.', "result" => 'fail'];
         }
-        
+
+//        if ($CheckToId == false) {
+//            $return = ["msg" => '회원가입에 성공 했습니다.', "result" => 'success'];
+//        } else {
+//            $return = ["msg" => '회원가입에 실패 했습니다.', "result" => 'fail'];
+//        }
+//
         break;
 
 }
 
 echo json_encode($return);
 
+if($request['mode']=='MemberJoin'){                                                         //모드에 따라 이동페이지 정함
+    header("Location: http://test.hackers.com/member/index.php?mode=step_04");
 
+}
 
 
 ?>
