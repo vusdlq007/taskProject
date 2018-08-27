@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <!--[if (IE 7)]><html class="no-js ie7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"><![endif]-->
@@ -146,13 +148,17 @@
             <div class="inner">
                 <div class="link-box">
                     <!-- 로그인전 -->
+                    <?php  if(!isset($_SESSION['UserID']) && !isset($_SESSION['UserName'])) {  ?>
                     <a href="/member/login.php">로그인</a>
                     <a href="/member/index.php?mode=step_01">회원가입</a>
                     <a href="#">상담/고객센터</a>
+                    <?php } else {?>
+
                     <!-- 로그인후 -->
-                    <!-- <a href="#">로그아웃</a>
+                    <a href="/member/proc/login_action.php?mode=logout">로그아웃</a>
                     <a href="#">내정보</a>
-                    <a href="#">상담/고객센터</a> -->
+                    <a href="#">상담/고객센터</a>
+                    <?php }?>
                 </div>
             </div>
         </div>

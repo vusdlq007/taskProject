@@ -1,4 +1,14 @@
 
+<?php
+session_start();
+
+
+  if(isset($_SESSION['UserID']) && isset($_SESSION['UserName'])) {                  //로그인 화면인데 만약에 세션이 존재한다면 메인페이지로 이동시킴
+      header("Location: ../index.html");
+      }
+      
+
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <!--[if (IE 7)]><html class="no-js ie7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"><![endif]-->
@@ -31,21 +41,52 @@
 <script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/ui.js"></script>
 <!--[if lte IE 9]> <script src="/js/common/place_holder.js"></script> <![endif]-->
 
-</head><body>
+</head>
+
+<script>
+function login() {
+    var param = {
+        "mode" : "Login",
+        "IdValue"   : $('input[name=IdValue]').val(),
+        "PwdValue"  : $('input[name=PwdValue]').val(),
+    }
+
+    $.post( "/member/proc/login_action.php", param , function( data ) {
+        if(data.result =="loginfail"){
+            alert("로그인 실패 :"+data.msg);
+
+        }else{
+            alert(data.msg);
+            location.href='../';
+        }
+
+    }, "json").error(function () {
+        alert("통신실패 error"+$('input[name=IdValue]').val());
+    });
+
+}
+
+
+</script>
+
+<body>
 <div class="login-section">
 	<div class="bg"></div>
 	<div class="login-inner">
 		<h1><a href="/"><img src="http://img.hackershrd.com/common/logo.png" alt="해커스 HRD LOGO" width="142" height="31"/></a></h1>
 		<div class="box-login">
-			
-			<div class="login-input">
-				<div class="input-text-box">
-					<input type="text" class="input-text mb5" placeholder="아이디" style="width:190px"/>
-					<input type="text" class="input-text" placeholder="비밀번호" style="width:190px"/>
-				</div>
-				<button type="submit" class="btn-login">로그인</button>
-			</div>
-			
+
+<!--            <form action="/member/proc/login_action.php">-->
+<!--                <input type="hidden" name = "mode" value="Login">-->
+                <div class="login-input">
+                    <div class="input-text-box">
+                        <input type="text" name = "IdValue" class="input-text mb5" placeholder="아이디" style="width:190px"/>
+                        <input type="password" name = "PwdValue" class="input-text" placeholder="비밀번호" style="width:190px"/>
+                    </div>
+                    <button type="submit" class="btn-login" onclick="login()">로그인</button>
+                </div>
+<!--            </form>-->
+
 			<div class="login-chk">
 				<label class="input-sp">
 					<input type="checkbox"/>
@@ -56,8 +97,8 @@
 			</div>
 			
 			<div class="box-btn">
-				<a href="#" class="btn-m-gray">회원가입</a>
-				<a href="#" class="btn-m-gray">ID/PW 찾기</a>
+				<a href="/member/index.php?mode=step_01" class="btn-m-gray">회원가입</a>
+				<a href="/member/index.php?mode=pw_find" class="btn-m-gray">ID/PW 찾기</a>
 			</div>
 		</div>
 		<div class="login-guide">

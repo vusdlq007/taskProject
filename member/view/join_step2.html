@@ -8,17 +8,23 @@
             var phoneNum = new Array($("[name='phone[]'").length);
             //$(".input-num").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );       //입력값 기호,문자 유효성 검사
 
+            function phoneCheck() {																	//이름 입력란 유효성 검사 기능
+
+            }
 
             function ajaxCall() {
                 var isValid = true;			//빈칸 유효성 검사
+                var regId = /^[0-9]*$/;
+
+
 
                 $("[name='phone[]'").each(function (index, phone) {
                       phoneNum.push($(phone).val());
                 });
 
                 $("[name='phone[]'").each(function (index, phone) {
-                    if($(phone).val() == "") {
-                        alert("입력칸 모두를 입력해 주세요.");
+                    if($(phone).val() == "" || !regId.test($(phone).val())) {
+                        alert("숫자로 입력하시고 입력칸 모두를 입력해 주세요.");
                         isValid =  false;
                         return false;
                     }
