@@ -17,7 +17,8 @@ $modeValue = $_GET['mode'];
         'id_find' => 'view/login_idfind.php',
         'id_find_complete' => 'view/id_find_complete.php',
         'pw_find' => 'view/login_pwfind.php',
-        'pw_find_complete' => 'view/pw_find_complete.php'
+        'pw_find_complete' => 'view/pw_find_complete.php',
+        'member_info_modify' => 'view/member_info_modify.php'
     ];
 
     $file = $pages[$modeValue] ?? 'join_step1.html'; // ?? 은 값이 없을때 join1.php를 기본값으로 설정하는 구문

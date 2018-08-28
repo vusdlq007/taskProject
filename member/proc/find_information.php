@@ -32,8 +32,7 @@ function emailIdCheck($connect,$isName,$isEmail){                            // 
     $sql = "SELECT ID,Name FROM Member where Name ='".$isName."' AND Email = '".$isEmail."';";
 
     $result = mysqli_query($connect,$sql);
-    //var_dump('$connect', $connect);
-    //var_dump('$sql', $sql);
+
 
     $IsValue = mysqli_fetch_array($result);
 
@@ -72,8 +71,7 @@ function emailIdCheckPW($connect,$isName,$IsId,$isEmail){                       
     $sql = "SELECT ID,Name,PassWord FROM Member where Name ='".$isName."' AND Email = '".$isEmail."' AND ID = ''.$IsId.'';";
 
     $result = mysqli_query($connect,$sql);
-    //var_dump('$connect', $connect);
-    //var_dump('$sql', $sql);
+
 
     $IsValue = mysqli_fetch_array($result);
 

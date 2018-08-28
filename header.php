@@ -1,4 +1,4 @@
-
+<?php session_start();?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
@@ -152,11 +152,12 @@
                     <a href="/member/login.php">로그인</a>
                     <a href="/member/index.php?mode=step_01">회원가입</a>
                     <a href="#">상담/고객센터</a>
-                    <?php } else {?>
+
+                    <?php  } else {?>
 
                     <!-- 로그인후 -->
                     <a href="/member/proc/login_action.php?mode=logout">로그아웃</a>
-                    <a href="#">내정보</a>
+                    <a href="/member/index.php?mode=member_info_modify">내정보</a>
                     <a href="#">상담/고객센터</a>
                     <?php }?>
                 </div>
