@@ -9,7 +9,7 @@ $request = $_POST ? $_POST : $_GET;
 
     function LoginCheck($connect, $isId, $isPwd){
 
-        $sql = "SELECT ID,PassWord,Name,Phone,MemberIDX FROM Member where ID ='".$isId."'";
+        $sql = "SELECT ID,PassWord,Name,Phone,MemberIDX,adminCode FROM Member where ID ='".$isId."'";
 
         $result = mysqli_query($connect,$sql);
         //var_dump('$connect', $connect);
@@ -32,6 +32,7 @@ $request = $_POST ? $_POST : $_GET;
                 $_SESSION['UserName'] = $sqlResult['Name'];
                 $_SESSION['UserPhone'] = $sqlResult['Phone'];
                 $_SESSION['UserIDX'] = $sqlResult['MemberIDX'];
+                $_SESSION['adminCode'] = $sqlResult['adminCode'];
 
                 return true;
             }else{                                  // Id 비교는 성공 하지만 비밀번호 not 일치
