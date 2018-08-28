@@ -78,7 +78,7 @@ switch ($request['mode']) {
             if($CheckValue){
 
                 $return = ["msg" => '내정보 변경 성공!',"result" => 'success'];
-                echo "<script>alert('정보변경성공!');</script>";
+
 
 
             }else{

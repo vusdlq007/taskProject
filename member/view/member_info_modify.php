@@ -94,7 +94,7 @@ var_dump($_SESSION);
 
     $(function(){
 
-        $('form[name=memberInfo]').submit(function(){
+        $('input[name=memberInfosubmit]').click(function(){
 
             if(PwdCheck()==false){
                 alert("비밀번호는 8-15의 영문자/숫자 조합이여야 합니다.");
@@ -140,8 +140,32 @@ var_dump($_SESSION);
 
             }
 
-        });
 
+            var param = {
+                "mode" : "newFullInfoApply",
+                "Pwd" : $('input[name=Pwd]').val(),
+                "Email" : Email,
+                "FullAddress" : FullAddress,
+                "SMSOK" : $('input[name=SMSOK]:checked').val(),
+                "MailOK" : $('input[name=MailOK]:checked').val()
+            }
+
+
+
+            $.post( "/member/proc/member_update.php", param , function( data ) {
+                if(data.result =="fail"){
+                    alert(data.msg);
+                    $('#confirmNum').val('');
+                }else{
+                    alert(data.msg);
+                    location.href='/index.html';
+                }
+
+            }, "json").error(function () {
+                alert("error");
+            });
+
+        });
 
     });
 
@@ -160,9 +184,9 @@ var_dump($_SESSION);
 			</div>
 
             <form method="POST" name="memberInfo" autocomplete="on" action="/member/proc/member_update.php">
-                <input type="hidden" name="mode" value="newFullInfoApply">
-                <input type="hidden" name="Email" value="emailDefault">
-                <input type="hidden" name="FullAddress" value="addressDefault">
+<!--                <input type="hidden" name="mode" value="newFullInfoApply">-->
+<!--                <input type="hidden" name="Email" value="emailDefault">-->
+<!--                <input type="hidden" name="FullAddress" value="addressDefault">-->
 			<div class="section-content">
 				<table border="0" cellpadding="0" cellspacing="0" class="tbl-col-join">
 					<caption class="hidden">강의정보</caption>
@@ -260,7 +284,7 @@ var_dump($_SESSION);
 
 
 				<div class="box-btn">
-                    <input href="#" type="submit" class="btn-l"  style="cursor:pointer"   onclick="PwdCheck()" value="정보수정">
+                    <input href="#" name="memberInfosubmit" type="button" class="btn-l"  style="cursor:pointer"   onclick="PwdCheck()" value="정보수정">
 
 				</div>
                 </form>

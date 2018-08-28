@@ -34,12 +34,12 @@ $request = $_POST ? $_POST : $_GET;
         $sql = "insert into Member(Name, ID, PassWord, Email, Phone, Tel, Addr, SMSAgree, MailAgree, MemberIDX) values('".$_POST['Name']."','".$_POST['Id']."','".$hashPWD."','".$_POST['Email']."','".$_SESSION['phoneNum']."','".$_POST['Tel']."','".$_POST['FullAddress']."',"
             .$_POST['SMSOK'].",".$_POST['MailOK'].",NULL);";
 
-        var_dump($sql);
+       // var_dump($sql);
 
         $result = mysqli_query($connect,$sql);
     //        var_dump('$connect', $connect);
     //        var_dump($sql)
-        var_dump('$sql', $sql);
+        //var_dump('$sql', $sql);
         //var_dump('$result', $result);
 
         if($result){                                 // Id 비교 성공시
