@@ -8,9 +8,7 @@
             var phoneNum = new Array($("[name='phone[]'").length);
             //$(".input-num").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );       //입력값 기호,문자 유효성 검사
 
-            function phoneCheck() {																	//이름 입력란 유효성 검사 기능
 
-            }
 
             function ajaxCall() {
                 var isValid = true;			//빈칸 유효성 검사
@@ -40,7 +38,7 @@
                         ]
                     };
                     $.post( "/member/proc/join_step2.php", param , function( data ) {				// 인증번호 받기 눌렀을때
-                        alert(data.msg);
+                        alert(data.msg+"\n 인증번호 : "+data.authNum);
                         $('#confirmNum').focus();
 
                         isChecked = true; // 인증번호 받을 번호를 입력하고 인증번호 받기를 제대로 실행했는지 여부

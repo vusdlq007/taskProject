@@ -26,9 +26,9 @@ $request = $_POST ? $_POST : $_GET;
 
 
     function MemberJoining($connect){                                    // 회원가입 정보 insert 하는함수             서버에서 다시 받은값 유효성 검사
-//        if(!$_POST['Name'] || !$_POST['Id'] || $_POST['Pwd'] ||$_POST['Email'] || !$_SESSION['phoneNum'] || !$_POST['FullAddress'] || !$_POST['SMSOK'] || !$_POST['MailOK']){       // 백핸드에서 유효성 검사 다시해주기
-//           return false;
-//        }
+        if(!$_POST['Name'] || !$_POST['Id'] || !$_POST['Pwd'] || !$_POST['Email'] || !$_SESSION['phoneNum'] || !$_POST['FullAddress'] || !$_POST['SMSOK'] || !$_POST['MailOK']){       // 백핸드에서 유효성 검사 다시해주기
+           return false;
+        }
 
         $hashPWD= hash("sha256",$_POST['Pwd'] );                     // 비밀번호 SHA256 암호화
         $sql = "insert into Member(Name, ID, PassWord, Email, Phone, Tel, Addr, SMSAgree, MailAgree, MemberIDX) values('".$_POST['Name']."','".$_POST['Id']."','".$hashPWD."','".$_POST['Email']."','".$_SESSION['phoneNum']."','".$_POST['Tel']."','".$_POST['FullAddress']."',"

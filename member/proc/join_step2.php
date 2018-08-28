@@ -10,7 +10,7 @@ switch ($_POST['mode']){
         //$phone = join('-', $_POST['phone']);
         $phone = implode("-",$_POST['phone']);
         $_SESSION['auth_num'] = '123456';
-        $return = ["msg" => '인증번호를 발송하였습니다.', "result" => 'success'];
+        $return = ["msg" => '인증번호를 발송하였습니다.', "authNum" => '123456' ,"result" => 'success'];
 
         break;
     case 'auth_num_check' :

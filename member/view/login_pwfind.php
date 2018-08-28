@@ -1,62 +1,100 @@
 <script>
     var isValied03=false;
 
-    function findAjaxPhone() {                                              // 핸드폰 번호 인증 선택시 인증번호 받기 기능
+    // function findAjaxPhone() {                                              // 핸드폰 번호 인증 선택시 인증번호 받기 기능
+    //
+    //     var Phones = new Array();
+    //     Phones.push($('#pnum01').val());
+    //     Phones.push($('#pnum02').val());
+    //     Phones.push($('#pnum03').val());
+    //     Phones=Phones.join('-');
+    //     var Names = $('#Name').val();
+    //
+    //     var param = {
+    //         'mode' : 'authPhone',
+    //         'Names' : Names,
+    //         'Phones' : Phones
+    //     };
+    //     $.post( "/member/proc/find_information.php", param , function( data ) {				// 인증번호 받기 눌렀을때
+    //         alert(data.msg);
+    //         $('input[name=authCheck]').focus();
+    //         if(data.result=="success"){
+    //             isValied03 = true; // 인증번호 받을 번호를 입력하고 인증번호 받기를 제대로 실행했는지 여부
+    //         }
+    //
+    //     }, "json").error(function () {
+    //         alert("error");
+    //     });
+    // }
+    //
+    //
+    // function findAjaxEmail() {                                                          // 이메일 인증 선택시 인증번호 받기 기능
+    //
+    //     var Emails = new Array();
+    //     Emails.push($('input[name=Email01]').val());
+    //     Emails.push($('input[name=Email02]').val());
+    //
+    //     Emails=Emails.join("@");
+    //     var Names = $('#Name').val();
+    //
+    //     var param = {
+    //         'mode' : 'authEmail',
+    //         'Names' : Names,
+    //         'Emails' : Emails
+    //     };
+    //     $.post( "/member/proc/find_information.php", param , function( data ) {				// 인증번호 받기 눌렀을때
+    //         alert(data.msg);
+    //         $('input[name=authCheck]').focus();
+    //
+    //         if(data.result=="success"){
+    //             isValied03 = true; // 인증번호 받을 번호를 입력하고 인증번호 받기를 제대로 실행했는지 여부
+    //         }
+    //     }, "json").error(function () {
+    //         alert("error");
+    //     });
+    // }
 
-        var Phones = new Array();
-        Phones.push($('#pnum01').val());
-        Phones.push($('#pnum02').val());
-        Phones.push($('#pnum03').val());
-        Phones=Phones.join('-');
-        var Names = $('#Name').val();
 
-        var param = {
-            'mode' : 'authPhone',
-            'Names' : Names,
-            'Phones' : Phones
-        };
-        $.post( "/member/proc/find_information.php", param , function( data ) {				// 인증번호 받기 눌렀을때
-            alert(data.msg);
-            $('input[name=authCheck]').focus();
-            if(data.result=="success"){
-                isValied03 = true; // 인증번호 받을 번호를 입력하고 인증번호 받기를 제대로 실행했는지 여부
+
+
+    function FindAuthNum() {                                                            // 인증번호 받을 정보 입력칸 빈칸체크
+        var Checked = false;
+
+            if($('input[name=Name]').val()){
+                if($('input[type=radio][name^=radio]:checked').val()=="phoneSelect"){
+                    $('input[name^=Pnum]').each(function (index, PhoneNum) {
+                        if(PhoneNum.value){
+                            Checked = true;
+                            return true;
+                        }else{
+                            Checked = false;
+                            return false;
+                        }
+                    });
+                }else{
+                    $('input[name^=Email]').each(function (index, EmailNum) {
+                        if(EmailNum.value){
+                            Checked = true;
+                            return true;
+                        }else{
+                            Checked = false;
+                            return false;
+                        }
+                    });
+                }
+
             }
 
-        }, "json").error(function () {
-            alert("error");
-        });
+
+
+        if(Checked==true){
+            alert(<?php session_start(); echo $_SESSION['authNum']; ?>);
+            isValied03=true;
+        }else{
+            alert("인증받을 정보를 입력해 주세요.");
+        }
+
     }
-
-
-    function findAjaxEmail() {                                                          // 이메일 인증 선택시 인증번호 받기 기능
-
-        var Emails = new Array();
-        Emails.push($('input[name=Email01]').val());
-        Emails.push($('input[name=Email02]').val());
-
-        Emails=Emails.join("@");
-        var Names = $('#Name').val();
-
-        var param = {
-            'mode' : 'authEmail',
-            'Names' : Names,
-            'Emails' : Emails
-        };
-        $.post( "/member/proc/find_information.php", param , function( data ) {				// 인증번호 받기 눌렀을때
-            alert(data.msg);
-            $('input[name=authCheck]').focus();
-
-            if(data.result=="success"){
-                isValied03 = true; // 인증번호 받을 번호를 입력하고 인증번호 받기를 제대로 실행했는지 여부
-            }
-        }, "json").error(function () {
-            alert("error");
-        });
-    }
-
-
-
-
 
 
 
@@ -207,7 +245,7 @@
 				<dd>
 					고객님이 회원 가입 시 등록한 휴대폰 번호와 입력하신 휴대폰 번호가 동일해야 합니다.
 					<label class="input-sp big">
-						<input type="radio" name="radio" checked="checked" value="phoneSelect" onclick="CheckSolution()"/>
+						<input type="radio" name="radio" id = "PhoneId" checked="checked" value="phoneSelect" onclick="CheckSolution()"/>
 						<span class="input-txt"></span>
 					</label>
 				</dd>
@@ -218,7 +256,7 @@
 				<dd>
 					고객님이 회원 가입 시 등록한 이메일 주소와 입력하신 이메일 주소가 동일해야 합니다.
 					<label class="input-sp big">
-						<input type="radio" name="radio" value="emailSelect" onclick="CheckSolution()"/>
+						<input type="radio" name="radio" id = "EmailId" value="emailSelect" onclick="CheckSolution()"/>
 						<span class="input-txt"></span>
 					</label>
 				</dd>
@@ -235,7 +273,7 @@
 					<tbody>
 						<tr>
 							<th scope="col">성명</th>
-							<td><input type="text" id="Name" class="input-text" style="width:302px" /></td>
+							<td><input type="text" name="Name" id="Name" class="input-text" style="width:302px" /></td>
 						</tr>
 						<tr style="display: none">
 							<th scope="col">생년월일</th>
@@ -277,17 +315,17 @@
 									<option value="daum.com">daum.com</option>
 									<option value="nate.com">nate.com</option>
 								</select>
-								<a href="#" class="btn-s-tin ml10" onclick="findAjaxEmail()">인증번호 받기</a>
+								<a href="#" class="btn-s-tin ml10" onclick="FindAuthNum()">인증번호 받기</a>
 							</td>
 
 						</tr>
                         <tr class="tr-phone-info" >
                             <th scope="col">휴대폰번호</th>
                             <td>
-                                <input type="text" id="pnum01" class="input-text" style="width:138px"/>-
-                                <input type="text" id="pnum02" class="input-text" style="width:138px"/>-
-                                <input type="text" id="pnum03" class="input-text" style="width:138px"/>
-                                <a href="#" class="btn-s-tin ml10" onclick="findAjaxPhone()">인증번호 받기</a>
+                                <input type="text" name="Pnum01" id="pnum01" class="input-text" style="width:138px"/>-
+                                <input type="text" name="Pnum02" id="pnum02" class="input-text" style="width:138px"/>-
+                                <input type="text" name="Pnum03" id="pnum03" class="input-text" style="width:138px"/>
+                                <a href="#" class="btn-s-tin ml10" onclick="FindAuthNum()">인증번호 받기</a>
                             </td>
 
                         </tr>
