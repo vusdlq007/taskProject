@@ -32,6 +32,7 @@
     <script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/ui.js"></script>
     <!--[if lte IE 9]> <script src="/js/common/place_holder.js"></script> <![endif]-->
 
+
 </head>
 
 <!-- skip nav -->
@@ -54,84 +55,42 @@
                             <a href="#">일반직무</a>
                             <ul class="nav-sub-lst">
                                 <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
+
                             </ul>
                         </li>
                         <li class="mnu2">
                             <a href="#">산업직무</a>
                             <ul class="nav-sub-lst">
                                 <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
+
                             </ul>
                         </li>
                         <li class="mnu3">
                             <a href="#">공통역량</a>
                             <ul class="nav-sub-lst">
                                 <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
+
                             </ul>
                         </li>
                         <li class="mnu4">
                             <a href="#">어학 및 자격증</a>
                             <ul class="nav-sub-lst">
                                 <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
+
                             </ul>
                         </li>
                         <li class="mnu5">
                             <a href="#">직무교육 안내</a>
                             <ul class="nav-sub-lst">
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
+                                <li><a href="/member/index.php?mode=list">수강후기</a></li>
+
                             </ul>
                         </li>
                         <li class="mnu6">
                             <a href="#">내 강의실</a>
                             <ul class="nav-sub-lst">
                                 <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
-                                <li><a href="#">서브메뉴</a></li>
+
                             </ul>
                         </li>
                     </ul>
@@ -153,7 +112,13 @@
                     <a href="/member/index.php?mode=step_01">회원가입</a>
                     <a href="#">상담/고객센터</a>
 
-                    <?php  } else {?>
+                    <?php  } elseif (isset($_SESSION['UserID']) && isset($_SESSION['UserName']) && isset($_SESSION['adminCode'])){?>
+                        <span >환영합니다. 관리자님!</span>
+                        <a href="/member/index.php?mode=admin_page">수강후기 등록/수정/삭제</a>
+                        <a href="/member/proc/login_action.php?mode=logout">로그아웃</a>
+                        <a href="/member/index.php?mode=member_info_modify">내정보</a>
+                        <a href="#">상담/고객센터</a>
+                    <?php }else {?>
 
                     <!-- 로그인후 -->
                     <a href="/member/proc/login_action.php?mode=logout">로그아웃</a>

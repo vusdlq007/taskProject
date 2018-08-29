@@ -1,3 +1,25 @@
+<script>
+    window.onload=function(){       // 페이지가 로딩된 후 실행해야 되는 코드를 추가한다.
+        var param = {
+            'mode' : 'selectList',
+        };
+
+
+        $.post( "/member/proc/attending_after_select.php", param , function( data ) {				// 게시물 List 가져옴
+            alert(data.msg);
+            console.log(data.Result);
+
+            var ListArray = new Array();
+            $.each(data.Result,function (index,value) {                                             // 값 전달 받아서 수정중
+                ListArray.push(value[index]);
+                console.log("배열값["+index+"] :"+ListArray[index]);
+            })
+        }, "json").error(function () {
+            alert("error");
+        });
+    }
+
+</script>
 
 <div id="container" class="container">
 	<?php include "../LNB.php"; ?>
@@ -56,6 +78,9 @@
 	 
 			<tbody>
 				<!-- set -->
+
+
+
 				<tr class="bbs-sbj">
 					<td><span class="txt-icon-line"><em>BEST</em></span></td>
 					<td>CS</td>
