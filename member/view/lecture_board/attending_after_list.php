@@ -1,5 +1,6 @@
 <script>
     window.onload=function(){       // 페이지가 로딩된 후 실행해야 되는 코드를 추가한다.
+        var ListArray;
         var param = {
             'mode' : 'selectList',
         };
@@ -9,14 +10,43 @@
             alert(data.msg);
             console.log(data.Result);
 
-            var ListArray = new Array();
-            $.each(data.Result,function (index,value) {                                             // 값 전달 받아서 수정중
-                ListArray.push(value[index]);
-                console.log("배열값["+index+"] :"+ListArray[index]);
-            })
+            ListArray = data.Result;
+            var List = "<table>";
+            var indexs=0;
+
+
+            $.each(data.Result,function (index,item) {                                             // 값 전달 받아서 수정중
+
+                 // console.log("배열값["+index+"] :"+item['Topic']);
+                indexs++;
+                List +="<tr class='bbs-sbj'><td>"+indexs+"</td>";
+                List +="<td>"+item['LectureType']+"</td>";
+                List +="<td>";
+                List +="<a href='#'>";
+                List +="<span class=\"tc-gray ellipsis_line\">수강 강의명 :"+item['Lecture']+" </span>";
+                List +="<strong class='ellipsis_line'>"+item['Topic']+"</strong>";
+                List +="</a>";
+                List +="</td>";
+                // List +="<td>"+item['Setisfy']+"</td>";
+                List +=" <td> <span class='star-rating'> <span class='star-inner' style='width:80%'></span> </span> </td> <td class='last'>"+item['Writer']+"</td>";
+
+                List +="<tr>";
+
+
+            });
+
+            List += "</table>"
+
+            $('tbody:first').html(List);
+            // for(var i = 0 ; i < ListArray.length ;i++){
+            //     console.log("배열값["+i+"] :"+ListArray[i]['Lecture']);
+            // }
+
+            List +="</table>"
         }, "json").error(function () {
             alert("error");
         });
+
     }
 
 </script>
@@ -82,7 +112,7 @@
 
 
 				<tr class="bbs-sbj">
-					<td><span class="txt-icon-line"><em>BEST</em></span></td>
+					<td><span class="txt-icon-line">0</span></td>
 					<td>CS</td>
 					<td>
 						<a href="#">
