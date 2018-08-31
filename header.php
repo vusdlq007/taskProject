@@ -32,6 +32,8 @@
     <script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/ui.js"></script>
     <!--[if lte IE 9]> <script src="/js/common/place_holder.js"></script> <![endif]-->
 
+    <script type="text/javascript" src="/member/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+
 
 </head>
 

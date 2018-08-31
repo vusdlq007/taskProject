@@ -1,17 +1,40 @@
+<?php session_start();
+var_dump($_SESSION) ?>
+<script>
+    $(function(){
+        //전역변수선언
+        var editor_object = [];
+
+        nhn.husky.EZCreator.createInIFrame({
+            oAppRef: editor_object,
+            elPlaceHolder: "smarteditor1",
+            sSkinURI: "/member/smarteditor/SmartEditor2Skin.html",
+            htParams : {
+                // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+                bUseToolbar : true,
+                // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+                bUseVerticalResizer : true,
+                // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+                bUseModeChanger : true,
+            }
+        });
+
+        //전송버튼 클릭이벤트
+        $("#savebutton").click(function(){
+            //id가 smarteditor인 textarea에 에디터에서 대입
+            editor_object.getById["smarteditor1"].exec("UPDATE_CONTENTS_FIELD", []);
+
+            // 이부분에 에디터 validation 검증
+
+            //폼 submit
+            $("#frm").submit();
+        })
+    })
+
+</script>
 
 <div id="container" class="container">
-	<div id="nav-left" class="nav-left">
-		<div class="nav-left-tit"> 
-			<span>직무교육 안내</span>
-		</div>
-		<ul class="nav-left-lst">
-			<li><a href="#">해커스 HRD 소개</a></li>
-			<li><a href="#">사업주훈련</a></li>
-			<li><a href="#">근로자카드</a></li>
-			<li><a href="#">학습안내</a></li>
-			<li class="on"><a href="#">수강후기</a></li>
-		</ul>
-	</div>
+    <?php include "../LNB.php"; ?>
 
 	<div id="content" class="content">
 		<div class="tit-box-h3">
@@ -37,22 +60,31 @@
 				<col style="width:15%"/>
 				<col style="*"/>
 			</colgroup>
-
+            <form action="/member/proc/attending_after_sign.php" method="post" id="frm">
+                <input type="hidden" name="mode" value="register">
 			<tbody>
 				<tr>
 					<th scope="col">강의</th>
 					<td>
-						<select class="input-sel" style="width:160px">
+						<select class="input-sel" name="LectureType" style="width:160px">
 							<option value="">분류</option>
+                            <option value="일반직무">일반직무</option>
+                            <option value="산업직무">산업직무</option>
+                            <option value="공통역량">공통역량</option>
+                            <option value="어학 및 자격증">어학 및 자격증</option>
 						</select>
-						<select class="input-sel ml5" style="width:454px">
+						<select class="input-sel ml5" name="Lecture" style="width:454px">
 							<option value="">강의명</option>
+                            <option value="Beyond Trouble, 조직을 감동시키는 관계의 기술">Beyond Trouble,조직을 감동시키는 관계의 기술</option>
+                            <option value="신입사원 OT">신입사원 OT</option>
+                            <option value="Jquery 입문">Jquery 입문</option>
+                            <option value="SQL 기초교육">SQL 기초교육</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<th scope="col">제목</th>
-					<td><input type="text" class="input-text" style="width:611px"/></td>
+					<td><input type="text" class="input-text" name="Topic" style="width:611px"/></td>
 				</tr>
 				<tr>
 					<th scope="col">강의만족도</th>
@@ -60,7 +92,7 @@
 						<ul class="list-rating-choice">
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="radio" id="" checked="checked"/>
+									<input type="radio" name="Setisfy" id=""  checked="checked" value=5 />
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -69,7 +101,7 @@
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="radio" id=""/>
+									<input type="radio" name="Setisfy" id=""  value=4 />
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -78,7 +110,7 @@
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="radio" id=""/>
+									<input type="radio" name="Setisfy" id=""  value=3 />
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -87,7 +119,7 @@
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="radio" id=""/>
+									<input type="radio" name="Setisfy" id=""  value=2 />
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -96,7 +128,7 @@
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="radio" id=""/>
+									<input type="radio" name="Setisfy" id=""  value=1 />
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -110,13 +142,16 @@
 		</table>
 
 		<div class="editor-wrap">
-			에디터영역
+            <textarea name="smarteditor" id="smarteditor1" rows="10" cols="100" style="width:766px; height:412px;" ></textarea>
+
+
 		</div>
 	
 		<div class="box-btn t-r">
-			<a href="#" class="btn-m-gray">목록</a>
-			<a href="#" class="btn-m ml5">저장</a>
+			<a href="/member/index.php?mode=list" class="btn-m-gray">목록</a>
+			<button type="submit" id="savebutton" class="btn-m ml5" value="저장" style="cursor: pointer"/>저장
 		</div>
+        </form>
 
 
 		

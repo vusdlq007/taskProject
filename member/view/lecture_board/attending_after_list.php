@@ -1,6 +1,25 @@
 <script>
+
+    $.urlParam = function(name){                                            // 정규식을 사용한 GET 파라미터 뽑는 함수정의
+        var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+
+        if (results==null){
+            return null;
+        }
+        else{
+            return results[1] || 0;
+        }
+    }
+
+        
     window.onload=function(){       // 페이지가 로딩된 후 실행해야 되는 코드를 추가한다.
         var ListArray;
+        var pageTotalNum;            // 총 레코드 갯수
+        var postValue;
+
+
+
+
         var param = {
             'mode' : 'selectList',
         };
@@ -9,16 +28,43 @@
         $.post( "/member/proc/attending_after_select.php", param , function( data ) {				// 게시물 List 가져옴
             alert(data.msg);
             console.log(data.Result);
-
             ListArray = data.Result;
+            postValue = decodeURIComponent($.urlParam('page'));
+
+            pageTotalNum = ListArray.length;
+            //console.log(decodeURIComponent($.urlParam('mode')));
+
+
+
+            var list = 20;                                      // 한 페이지에 나열할 게시물 수
+            var b_pageNum_list = 10;                                     //  한 블록에 표시해줄 번호 수
+            var pageNum = postValue ? postValue : 1 ;                // 현재 페이지 번호   // 현재 페이지 값이 없으면 1페이지로 세팅
+            
+
+
+            var block = Math.ceil(pageNum / b_pageNum_list);                         // 현재 블록
+            var b_start_page = ((block-1)*b_pageNum_list)+1;
+            var b_end_page = b_start_page + b_pageNum_list -1;
+
+            var total_page = Math.ceil(pageTotalNum/list);              // 총 페이지 수
+
+
+            if(b_end_page > total_page){
+                b_end_page = total_page;
+            }
+
+
+
+
+
             var List = "<table>";
             var indexs=0;
+           // console.log("배열길이"+RecordCount);
 
 
             $.each(data.Result,function (index,item) {                                             // 값 전달 받아서 수정중
 
-                 // console.log("배열값["+index+"] :"+item['Topic']);
-                indexs++;
+                indexs++;                                           // 인덱스 번호
                 List +="<tr class='bbs-sbj'><td>"+indexs+"</td>";
                 List +="<td>"+item['LectureType']+"</td>";
                 List +="<td>";
@@ -34,6 +80,8 @@
 
 
             });
+
+
 
             List += "</table>"
 
@@ -52,7 +100,25 @@
 </script>
 
 <div id="container" class="container">
-	<?php include "../LNB.php"; ?>
+	<?php include "../LNB.php";
+    include($_SERVER['DOCUMENT_ROOT']."/member/db/dbconn.php");
+
+    $sql = "SELECT count(boardIDX) FROM Lecture ;";
+
+    $result = mysqli_query($connect,$sql);
+    //var_dump('$connect', $connect);
+    //var_dump('$sql', $sql);
+//    echo "$result";
+//    $IsValue = mysqli_fetch_array($result);
+
+	?>
+
+    <?php
+
+
+
+    ?>
+
 
 	<div id="content" class="content">
 		<div class="tit-box-h3">
@@ -163,7 +229,7 @@
 		</div>
 
 		<div class="box-btn t-r">
-			<a href="#" class="btn-m">후기 작성</a>
+			<a href="/member/index.php?mode=register" class="btn-m">후기 작성</a>
 		</div>
 	</div>
 </div>

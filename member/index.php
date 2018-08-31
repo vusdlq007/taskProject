@@ -23,6 +23,7 @@ $modeValue = $_GET['mode'];
             'pw_find_complete' => 'view/pw_find_complete.php',
             'member_info_modify' => 'view/member_info_modify.php',
             'list' => 'view/lecture_board/attending_after_list.php',
+            'register' => 'view/lecture_board/attending_register.php',
             'admin_page' => 'admin/index.php'
         ];
     }else{
@@ -37,6 +38,7 @@ $modeValue = $_GET['mode'];
             'pw_find_complete' => 'view/pw_find_complete.php',
             'member_info_modify' => 'view/member_info_modify.php',
             'list' => 'view/lecture_board/attending_after_list.php',
+            'register' => 'view/lecture_board/attending_register.php'
         ];
     }
 
