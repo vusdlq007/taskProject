@@ -1,3 +1,8 @@
+<?php
+include ($_SERVER['DOCUMENT_ROOT']."/header.php");
+
+?>
+
 <script>
 
     $.urlParam = function(name){                                            // 정규식을 사용한 GET 파라미터 뽑는 함수정의
@@ -26,7 +31,7 @@
 
 
         $.post( "/member/proc/attending_after_select.php", param , function( data ) {				// 게시물 List 가져옴
-            alert(data.msg);
+            // alert(data.msg);
             console.log(data.Result);
             ListArray = data.Result;
             postValue = decodeURIComponent($.urlParam('page'));
@@ -36,15 +41,17 @@
 
 
 
-            var list = 20;                                      // 한 페이지에 나열할 게시물 수
-            var b_pageNum_list = 10;                                     //  한 블록에 표시해줄 번호 수
+            var list = 10;                                      // 한 페이지에 나열할 게시물 수
+            var b_pageNum_list = 10;                                     //  한 블록에 표시해줄 페이지 수
             var pageNum = postValue ? postValue : 1 ;                // 현재 페이지 번호   // 현재 페이지 값이 없으면 1페이지로 세팅
             
 
 
             var block = Math.ceil(pageNum / b_pageNum_list);                         // 현재 블록
-            var b_start_page = ((block-1)*b_pageNum_list)+1;
-            var b_end_page = b_start_page + b_pageNum_list -1;
+            var b_start_page = ((pageNum - 1)/ b_pageNum_list ) * b_pageNum_list + 1;               // 현재 페이지가 pageCount와 같을 때를 유의하며(page-1)을 하고 +1은 첫페이지가 0이나 10이 아니라 1이나 11로 하기 위함임
+            var b_end_page = b_start_page + b_pageNum_list -1; //-1은 첫페이지가 1이나 11등과 같을때 1~10, 11~20으로 지정하기 위함임
+
+
 
             var total_page = Math.ceil(pageTotalNum/list);              // 총 페이지 수
 
@@ -53,12 +60,31 @@
                 b_end_page = total_page;
             }
 
+            if(total_page < pageNum){
+                pageNum = total_page;
+            }
+
+            if(b_end_page > total_page){
+                b_end_page = total_page;
+            }
+
+
+
+            var List2= "<a href='#'><i class='icon-first'><span class='hidden'>첫페이지</span></i></a>" +
+                "<a href='#'><i class='icon-prev'><span class='hidden'>이전페이지</span></i></a>";          // 페이지 표시 값을 태그에 포함해서 담을 변수
+
+            for(var j=b_start_page-1 ;j <= b_end_page;j++){
+                List2 += "<a href='/member/view/lecture_board/attending_after_list.php?page="+j+"'>"+j+"</a>";
+            }
+
+            List2+= "<a href='#'><i class='icon-last'><span class='hidden'>마지막페이지</span></i></a>" +
+                "<a href='#'><i class='icon-next'><span class='hidden'>다음페이지</span></i></a>";
 
 
 
 
             var List = "<table>";
-            var indexs=0;
+            var indexs = 0;
            // console.log("배열길이"+RecordCount);
 
 
@@ -86,6 +112,9 @@
             List += "</table>"
 
             $('tbody:first').html(List);
+
+            $("div[name='pageNumbers']").html(List2);
+
             // for(var i = 0 ; i < ListArray.length ;i++){
             //     console.log("배열값["+i+"] :"+ListArray[i]['Lecture']);
             // }
@@ -100,7 +129,7 @@
 </script>
 
 <div id="container" class="container">
-	<?php include "../LNB.php";
+	<?php include $_SERVER['DOCUMENT_ROOT']."/LNB.php";
     include($_SERVER['DOCUMENT_ROOT']."/member/db/dbconn.php");
 
     $sql = "SELECT count(boardIDX) FROM Lecture ;";
@@ -215,17 +244,17 @@
 			</tbody>
 		</table>
 
-		<div class="box-paging">
-			<a href="#"><i class="icon-first"><span class="hidden">첫페이지</span></i></a>
-			<a href="#"><i class="icon-prev"><span class="hidden">이전페이지</span></i></a>
-			<a href="#" class="active">1</a>
-			<a href="#">2</a>
-			<a href="#">3</a>
-			<a href="#">4</a>
-			<a href="#">5</a>
-			<a href="#">6</a>
-			<a href="#"><i class="icon-next"><span class="hidden">다음페이지</span></i></a>
-			<a href="#"><i class="icon-last"><span class="hidden">마지막페이지</span></i></a>
+		<div class="box-paging" name = "pageNumbers">
+<!--			<a href="#"><i class="icon-first"><span class="hidden">첫페이지</span></i></a>-->
+<!--			<a href="#"><i class="icon-prev"><span class="hidden">이전페이지</span></i></a>-->
+<!--			<a href="#" class="active">1</a>-->
+<!--			<a href="#">2</a>-->
+<!--			<a href="#">3</a>-->
+<!--			<a href="#">4</a>-->
+<!--			<a href="#">5</a>-->
+<!--			<a href="#">6</a>-->
+<!--			<a href="#"><i class="icon-next"><span class="hidden">다음페이지</span></i></a>-->
+<!--			<a href="#"><i class="icon-last"><span class="hidden">마지막페이지</span></i></a>-->
 		</div>
 
 		<div class="box-btn t-r">
@@ -235,4 +264,7 @@
 </div>
 
 
+<?php
+include ($_SERVER['DOCUMENT_ROOT']."/footer.php");
 
+?>

@@ -7,9 +7,8 @@ session_start();
 $request = $_POST ? $_POST : $_GET;
 
 
-
     function IdCheck($connect,$isId){                            // Id 체크하는 함수             서버에서 다시 ID 유효성 검사
-        $sql = "SELECT ID FROM Member where ID ='".$isId."'";
+        $sql = "SELECT ID FROM member where ID ='".$isId."'";
 
         $result = mysqli_query($connect,$sql);
         //var_dump('$connect', $connect);
@@ -31,10 +30,9 @@ $request = $_POST ? $_POST : $_GET;
         }
 
         $hashPWD= hash("sha256",$_POST['Pwd'] );                     // 비밀번호 SHA256 암호화
-        $sql = "insert into Member(Name, ID, PassWord, Email, Phone, Tel, Addr, SMSAgree, MailAgree, MemberIDX) values('".$_POST['Name']."','".$_POST['Id']."','".$hashPWD."','".$_POST['Email']."','".$_SESSION['phoneNum']."','".$_POST['Tel']."','".$_POST['FullAddress']."',"
+        $sql = "insert into member(Name, ID, PassWord, Email, Phone, Tel, Addr, SMSAgree, MailAgree, MemberIDX) values('".$_POST['Name']."','".$_POST['Id']."','".$hashPWD."','".$_POST['Email']."','".$_SESSION['phoneNum']."','".$_POST['Tel']."','".$_POST['FullAddress']."',"
             .$_POST['SMSOK'].",".$_POST['MailOK'].",NULL);";
 
-       // var_dump($sql);
 
         $result = mysqli_query($connect,$sql);
     //        var_dump('$connect', $connect);

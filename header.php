@@ -84,7 +84,7 @@
                         <li class="mnu5">
                             <a href="#">직무교육 안내</a>
                             <ul class="nav-sub-lst">
-                                <li><a href="/member/index.php?mode=list">수강후기</a></li>
+                                <li><a href="/member/view/lecture_board/attending_after_list.php?page=1">수강후기</a></li>
 
                             </ul>
                         </li>
@@ -126,7 +126,7 @@
                     <a href="/member/proc/login_action.php?mode=logout">로그아웃</a>
                     <a href="/member/index.php?mode=member_info_modify">내정보</a>
                     <a href="#">상담/고객센터</a>
-                    <?php }?>
+                    <?php } ?>
                 </div>
             </div>
         </div>

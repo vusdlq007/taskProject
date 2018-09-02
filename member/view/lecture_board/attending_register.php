@@ -148,7 +148,7 @@ var_dump($_SESSION) ?>
 		</div>
 	
 		<div class="box-btn t-r">
-			<a href="/member/index.php?mode=list" class="btn-m-gray">목록</a>
+			<a href="/member/view/lecture_board/attending_after_list.php?page=1" class="btn-m-gray">목록</a>
 			<button type="submit" id="savebutton" class="btn-m ml5" value="저장" style="cursor: pointer"/>저장
 		</div>
         </form>
